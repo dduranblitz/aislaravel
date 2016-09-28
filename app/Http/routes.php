@@ -26,7 +26,7 @@ Route::get('controlador','PruebaController@index');
 
 
 Route::get('/nombre/{nombre}', function ($nombre) {
-    return 'hola ni mi nombre es '.$nombre;
+    return 'hola ni mi nombre es el nombre '.$nombre;
 });
 
 Route::get('/edad/{edad?}', function ($edad=20) {
