@@ -12,7 +12,7 @@
 */
 
 Route::get('/prueba', function () {
-    return 'hola desde rutas php';
+    return 'hola desde rutas no te vallas chavo  php';
 });
 
 
