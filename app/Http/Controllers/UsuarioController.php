@@ -1,9 +1,13 @@
 <?php namespace Cinema\Http\Controllers;
 
 use Cinema\Http\Requests;
+use Cinema\Http\Requests\UserCreateRequest;
+use Cinema\Http\Requests\UserUpdateRequest;
 use Cinema\Http\Controllers\Controller;
-
+use Cinema\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
 class UsuarioController extends Controller {
 
@@ -14,7 +18,7 @@ class UsuarioController extends Controller {
 	 */
 	public function index()
 	{
-	  $users= \Cinema\User::All();	
+	  $users= User::All();	
 	 return view('usuario.index',compact('users'));
 	}
 
@@ -33,16 +37,17 @@ class UsuarioController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(UserCreateRequest $request)
 	{
 	 
-      \Cinema\User::create([
+      User::create([
         'name'=>$request['name'],
         'email'=>$request['email'],
-        'password'=>bcrypt($request['password']),
+        'password'=>$request['password'],
         ]);
 
-    return redirect('/usuario')->with('message','store');
+   Session::flash('message','Usuario guardado correctamente');
+     return Redirect::to('/usuario');
  
 	}
 
@@ -65,7 +70,8 @@ class UsuarioController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+	   $user= User::find($id);
+	   return view('usuario.edit',['user'=>$user]);
 	}
 
 	/**
@@ -74,9 +80,15 @@ class UsuarioController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, UserUpdateRequest $request)
 	{
-		//
+	 $user = User::find($id);
+	 $user->fill($request->all());
+	 $user->save();
+     Session::flash('message','Usuario editado correctamente'
+     	);
+     return Redirect::to('/usuario');
+
 	}
 
 	/**
@@ -87,7 +99,10 @@ class UsuarioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		User::destroy($id);
+		 Session::flash('message','Usuario Eliminado correctamente'
+     	);
+       return Redirect::to('/usuario');
 	}
 
 }
