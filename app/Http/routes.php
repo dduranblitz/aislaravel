@@ -49,3 +49,6 @@ Route::controllers([
 
 
 Route::resource('usuario','UsuarioController');
+Route::resource('log','LogController');
+Route::get('admin','FrontController@admin');
+Route::get('logout','LogController@logout');

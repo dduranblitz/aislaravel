@@ -8,8 +8,21 @@ use Cinema\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Routing\Route;
 
 class UsuarioController extends Controller {
+
+
+
+   public function __construct(){
+   $this->beforeFilter('@find',['only'=>['edit','update','destroy']]);
+    }
+
+    
+   public function find(Route $route){
+   	$this->user = User::find($route->getParameter('usuario'));
+   ///	return $this->user;
+   }
 
 	/**
 	 * Display a listing of the resource.
@@ -18,7 +31,7 @@ class UsuarioController extends Controller {
 	 */
 	public function index()
 	{
-	  $users= User::All();	
+	  $users= User::paginate(3);	
 	 return view('usuario.index',compact('users'));
 	}
 
@@ -40,14 +53,10 @@ class UsuarioController extends Controller {
 	public function store(UserCreateRequest $request)
 	{
 	 
-      User::create([
-        'name'=>$request['name'],
-        'email'=>$request['email'],
-        'password'=>$request['password'],
-        ]);
+      User::create($request->all());
 
-   Session::flash('message','Usuario guardado correctamente');
-     return Redirect::to('/usuario');
+      Session::flash('message','Usuario guardado correctamente');
+      return Redirect::to('/usuario');
  
 	}
 
@@ -70,8 +79,8 @@ class UsuarioController extends Controller {
 	 */
 	public function edit($id)
 	{
-	   $user= User::find($id);
-	   return view('usuario.edit',['user'=>$user]);
+	 
+	   return view('usuario.edit',['user'=>$this->user]);
 	}
 
 	/**
@@ -82,9 +91,9 @@ class UsuarioController extends Controller {
 	 */
 	public function update($id, UserUpdateRequest $request)
 	{
-	 $user = User::find($id);
-	 $user->fill($request->all());
-	 $user->save();
+	 
+	 $this->user->fill($request->all());
+	 $this->user->save();
      Session::flash('message','Usuario editado correctamente'
      	);
      return Redirect::to('/usuario');
@@ -99,7 +108,8 @@ class UsuarioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		User::destroy($id);
+		$user = User::find($id);
+		$this->user->delete();
 		 Session::flash('message','Usuario Eliminado correctamente'
      	);
        return Redirect::to('/usuario');
