@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@include('alerts.success');
+@include('alerts.success')
 @section('content')
 <table class="table">
 	<thead>
@@ -19,6 +19,5 @@
 	@endforeach
 </table>
 {!!$users->render()!!}
-
 @stop
 

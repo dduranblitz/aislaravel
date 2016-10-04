@@ -15,6 +15,8 @@ class UsuarioController extends Controller {
 
 
    public function __construct(){
+   	$this->middleware('auth');
+   	$this->middleware('admin');
    $this->beforeFilter('@find',['only'=>['edit','update','destroy']]);
     }
 
@@ -31,7 +33,7 @@ class UsuarioController extends Controller {
 	 */
 	public function index()
 	{
-	  $users= User::paginate(3);	
+	 $users= User::paginate(3);	
 	 return view('usuario.index',compact('users'));
 	}
 
@@ -43,6 +45,12 @@ class UsuarioController extends Controller {
 	public function create()
 	{
 	return view('usuario.create');
+	}
+
+
+	public function crearTarea()
+	{
+	return view('usuario.crearTarea');
 	}
 
 	/**

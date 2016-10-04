@@ -11,28 +11,8 @@
 |
 */
 
-Route::get('/prueba', function () {
-    return 'hola desde rutas no te vallas chavo  php';
-});
-
-
-
-
-Route::get('name/{nombre}','PruebaController@nombre');
-Route::resource('movie','MovieController');
-
 
 Route::get('controlador','PruebaController@index');
-
-
-Route::get('/nombre/{nombre}', function ($nombre) {
-    return 'hola ni mi nombre es el nombre '.$nombre;
-});
-
-Route::get('/edad/{edad?}', function ($edad=20) {
-    return 'hola ni mi edad es '.$edad;
-});
-
 
 
 Route::get('/', 'FrontController@index');
@@ -47,8 +27,14 @@ Route::controllers([
 ]);
 
 
-
+////agregar la ruta de crear tarea antes de definir el recurso
+Route::get('usuario/crearTarea', 'UsuarioController@crearTarea');
 Route::resource('usuario','UsuarioController');
+//////////////////////////////////////////////////////////////
 Route::resource('log','LogController');
 Route::get('admin','FrontController@admin');
 Route::get('logout','LogController@logout');
+
+
+
+
