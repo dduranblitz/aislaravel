@@ -14,18 +14,18 @@ class CreateTareasTable extends Migration
     {
         Schema::create('tareas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_tarea',100);
-            $table->string('tarea_ciclica',10);
-            $table->date('fecha_inicio')->nullable();
-            $table->date('fecha_final')->nullable();
-            $table->string('ciclo_tarea',50)->nullable();
+            $table->string('nombreTarea',100);
+            $table->string('tareaCiclica',10);
+            $table->date('fechaInicio')->nullable();
+            $table->date('fechaFinal')->nullable();
+            $table->string('cicloTarea',50)->nullable();
             $table->string('autor',100);
-            $table->string('tipo_responsable',50);
-            $table->string('persona_responsable',100)->nullable();
-            $table->string('grupo_responsable',100)->nullable();
+            $table->string('tipoResponsable',50);
+            $table->string('personaResponsable',100)->nullable();
+            $table->string('grupoResponsable',100)->nullable();
             $table->string('observador',100)->nullable();
             $table->string('editada',10)->nullable();
-            $table->string('estado_tarea',50)->nullable();
+            $table->string('estadoTarea',50)->nullable();
             $table->timestamps();
         });
     }

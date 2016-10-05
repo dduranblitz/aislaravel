@@ -28,7 +28,9 @@ Route::controllers([
 
 
 ////agregar la ruta de crear tarea antes de definir el recurso
-Route::get('usuario/crearTarea', 'UsuarioController@crearTarea');
+///Route::get('usuario/crearTarea', 'UsuarioController@crearTarea');
+
+Route::resource('tarea','TareaController');
 Route::resource('usuario','UsuarioController');
 //////////////////////////////////////////////////////////////
 Route::resource('log','LogController');

@@ -65,7 +65,7 @@
                             <a href="#"><i class="fa fa-folder-open fa-fw"></i> Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{!!URL::to('/usuario/crearTarea')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
+                                    <a href="{!!URL::to('/tarea/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                                 </li>
                              </ul>
                         </li> 
@@ -109,6 +109,7 @@
     
 
     {!!Html::script('js/jquery.min.js')!!}
+    {!!Html::script('js/funciones.js')!!}
     {!!Html::script('js/bootstrap.min.js')!!}
     {!!Html::script('js/metisMenu.min.js')!!}
     {!!Html::script('js/sb-admin-2.js')!!}
