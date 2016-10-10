@@ -26,11 +26,9 @@ class TareaForm extends Request
         return [
             'nombreTarea'=>'required',
             'tareaCiclica'=>'required',
-            'fechaInicioTres'=>'required',
-            'fechaFinal'=>'required',
-            'cicloTarea'=>'required',
             'autor'=>'required',
-            'responsablesss'=>'required',
+            'tipoResponsable'=>'required',
+            'observador'=>'required'
         ];
     }
 }

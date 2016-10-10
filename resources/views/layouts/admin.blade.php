@@ -67,6 +67,9 @@
                                 <li>
                                     <a href="{!!URL::to('/tarea/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                                 </li>
+                                <li>
+                                    <a href="{!!URL::to('/tarea')!!}"><i class='fa fa-list-ol fa-fw'></i> Tareas</a>
+                                </li>
                              </ul>
                         </li> 
 

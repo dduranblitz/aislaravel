@@ -18,7 +18,10 @@ class TareaController extends Controller
      */
     public function index()
     {
-
+      /// $tareas = Tarea::all(); 
+     $tareas= Tarea::paginate(6);    
+     return view('tarea.index',compact('tareas'));   
+     /// return view("tarea.index")->with('tareas', \App\Tarea::paginate(2)->setPath('post'));
     }
 
     /**
@@ -45,19 +48,41 @@ class TareaController extends Controller
 $tarea = new Tarea;
  
 $tarea->nombreTarea = \Request::input('nombreTarea');
+
 $tarea->tareaCiclica = \Request::input('tareaCiclica');
-$tarea->fechaInicio = \Request::input('fechaInicio');
-$tarea->fechaFinal = \Request::input('fechaFinal');
-$tarea->cicloTarea = \Request::input('cicloTarea');
+
+if(\Request::input('tareaCiclica')=='si'){
+   $tarea->fechaInicio =NULL;
+   $tarea->fechaFinal =NULL;
+   $tarea->cicloTarea = \Request::input('cicloTarea');
+}
+
+if(\Request::input('tareaCiclica')=='no'){
+   $tarea->fechaInicio =\Request::input('fechaInicio');
+   $tarea->fechaFinal =\Request::input('fechaFinal');;
+   $tarea->cicloTarea = NULL;
+}
+
+
 $tarea->autor  = \Request::input('autor');
+
 $tarea->tipoResponsable = \Request::input('tipoResponsable');
-$tarea->personaResponsable = \Request::input('personaResponsable');
-$tarea->grupoResponsable = \Request::input('grupoResponsable');
+if(\Request::input('tipoResponsable')=='persona'){
+  $tarea->personaResponsable = \Request::input('personaResponsable');  
+  $tarea->grupoResponsable = NULL;
+}
+
+
+if(\Request::input('tipoResponsable')=='grupo'){
+  $tarea->grupoResponsable = \Request::input('grupoResponsable');  
+  $tarea->personaResponsable = NULL;
+}
+
 $tarea->observador = \Request::input('observador');
 
  $tarea->save();
  Session::flash('message','Tarea creada correctamente' );
- return Redirect::to('/tarea/create');
+ return Redirect::to('/tarea');
 
 
     }
