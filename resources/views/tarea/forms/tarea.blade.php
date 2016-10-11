@@ -32,8 +32,8 @@
 </div>
 <div class="form-group hidden" id="divGrupoResponsable">
 {!!Form::label('Grupo Responsable:')!!}
-{!!Form::select('grupoResponsable', array('1' => 'GRUPO 1', '2' => 'GRUPO 2','3' => 'GRUPO 3'),null,['id'=>'grupoResponsable','class'=>'form-control'])!!}</div>
+{!!Form::select('grupoResponsable', $grupoTarea,null,['id'=>'grupoResponsable','class'=>'form-control'])!!}</div>
 <div class="form-group">
 {!!Form::label('Observador:')!!}
-{!!Form::select('observador',$observadores,null,['class'=>'form-control'])!!}
+{!!Form::select('observador',$usuarios,null,['class'=>'form-control'])!!}
 </div>

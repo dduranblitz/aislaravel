@@ -26,7 +26,7 @@
         <td>{{DB::table('users')->where('id', $tarea->autor)->value('name')}}</td>
         <td>{{$tarea->tipoResponsable}}</td>
         <td>{{DB::table('users')->where('id', $tarea->personaResponsable)->value('name')}}</td>
-        <td>{{$tarea->grupoResponsable}}</td>
+        <td>{{DB::table('grupo_tareas')->where('id', $tarea->grupoResponsable)->value('nombre')}}</td>
         <td>{{DB::table('users')->where('id', $tarea->observador)->value('name')}}</td>
         <td>
 		{!!link_to_route('tarea.edit', $title = 'Editar', $parameters = $tarea->id, $attributes = ['class'=>'btn btn-primary'])!!}	

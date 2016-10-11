@@ -22,7 +22,7 @@ class TareaController extends Controller
    
      $tareas= Tarea::paginate(5);    
      return view('tarea.index',compact('tareas'));   
-     /// return view("tarea.index")->with('tareas', \App\Tarea::paginate(2)->setPath('post'));
+     
     }
 
     /**
@@ -32,10 +32,10 @@ class TareaController extends Controller
      */
     public function create()
     {
-  
-    $usuarios = \DB::table('users')->lists('name', 'id');
-    $observadores = \DB::table('users')->lists('name', 'id');
-    return view('tarea.create')->with('usuarios', $usuarios)->with('observadores', $observadores);
+   
+    $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
+    $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
+    return view('tarea.create')->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
 
     }
 
@@ -45,17 +45,12 @@ class TareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TareaForm $tareaForm)
-    {
+    public function store(TareaForm $tareaForm){
 
-    
-$tarea = new Tarea;
- 
-$tarea->nombreTarea = \Request::input('nombreTarea');
-
-$tarea->tareaCiclica = \Request::input('tareaCiclica');
-
-if(\Request::input('tareaCiclica')=='si'){
+    $tarea = new Tarea;
+    $tarea->nombreTarea = \Request::input('nombreTarea');
+    $tarea->tareaCiclica = \Request::input('tareaCiclica');
+ if(\Request::input('tareaCiclica')=='si'){
    $tarea->fechaInicio =NULL;
    $tarea->fechaFinal =NULL;
    $tarea->cicloTarea = \Request::input('cicloTarea');
@@ -66,7 +61,6 @@ if(\Request::input('tareaCiclica')=='no'){
    $tarea->fechaFinal =\Request::input('fechaFinal');;
    $tarea->cicloTarea = NULL;
 }
-
 
 $tarea->autor  = \Request::input('autor');
 

@@ -26,7 +26,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Cinema Admin</a>
+                <a class="navbar-brand" href="">Panel de administracion</a>
             </div>
            
 
@@ -70,8 +70,21 @@
                                 <li>
                                     <a href="{!!URL::to('/tarea')!!}"><i class='fa fa-list-ol fa-fw'></i> Tareas</a>
                                 </li>
-                             </ul>
+                            </ul>
                         </li> 
+                        <li>
+                            <a href="#"><i class="fa fa-folder-open fa-fw"></i> Grupos de Tareas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!!URL::to('/grupoTarea/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
+                                </li>
+                                <li>
+                                    <a href="{!!URL::to('/grupoTarea')!!}"><i class='fa fa-list-ol fa-fw'></i>Listar Grupos</a>
+                                </li>
+                            </ul>
+                        </li> 
+
+
                     </ul>
                 </div>
             </div>

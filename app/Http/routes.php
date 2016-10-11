@@ -37,6 +37,9 @@ Route::resource('log','LogController');
 Route::get('admin','FrontController@admin');
 Route::get('logout','LogController@logout');
 
+////////grupo tarea recursos
+Route::resource('grupoTarea', 'GrupoTareaController');
+
 
 
 
