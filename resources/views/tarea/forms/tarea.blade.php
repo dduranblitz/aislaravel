@@ -28,7 +28,7 @@
 </div>
 <div class="form-group hidden"  id="divPersonaResponsable">
 {!!Form::label('Persona Responsable:')!!}
-{!!Form::select('personaResponsable', array('1' => 'JOSE', '2' => 'MARIO','3' => 'DIEGO'),null,['id'=>'personaResponsable','class'=>'form-control'])!!}
+{!!Form::select('personaResponsable', $usuarios,null,['id'=>'personaResponsable','class'=>'form-control'])!!}
 </div>
 <div class="form-group hidden" id="divGrupoResponsable">
 {!!Form::label('Grupo Responsable:')!!}

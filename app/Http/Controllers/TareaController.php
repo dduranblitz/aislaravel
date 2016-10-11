@@ -3,6 +3,7 @@ use Cinema\Http\Requests;
 use Cinema\Http\Requests\TareaForm;
 use Cinema\Http\Controllers\Controller;
 use Cinema\Tarea;
+use Cinema\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
@@ -18,8 +19,8 @@ class TareaController extends Controller
      */
     public function index()
     {
-      /// $tareas = Tarea::all(); 
-     $tareas= Tarea::paginate(6);    
+   
+     $tareas= Tarea::paginate(5);    
      return view('tarea.index',compact('tareas'));   
      /// return view("tarea.index")->with('tareas', \App\Tarea::paginate(2)->setPath('post'));
     }
