@@ -16,11 +16,11 @@
 </div>
 <div class="form-group hidden" id="divCicloTarea">
 {!!Form::label('Ciclo tarea:')!!}
-{!!Form::select('cicloTarea', array('diaria' => 'DIARIA', 'semanal' => 'SEMANAL','mensual' => 'MENSUAL'),null,['id'=>'cicloTarea','class'=>'form-control '])!!}
+{!!Form::select('cicloTarea', array('semanal' => 'SEMANAL', 'mensual' => 'MENSUAL','anual' => 'ANUAL'),null,['id'=>'cicloTarea','class'=>'form-control '])!!}
 </div>
 <div class="form-group">
-{!!Form::label('Autor:')!!}
-{!!Form::select('autor', array('' => '','1' => 'JOSE', '2' => 'MARIO','3' => 'DIEGO'),null,['class'=>'form-control'])!!}
+{!! Form::label('Autor') !!}
+{!! Form::select('autor',$usuarios, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
 {!!Form::label('Tipo Responsable:')!!}
@@ -35,5 +35,5 @@
 {!!Form::select('grupoResponsable', array('1' => 'GRUPO 1', '2' => 'GRUPO 2','3' => 'GRUPO 3'),null,['id'=>'grupoResponsable','class'=>'form-control'])!!}</div>
 <div class="form-group">
 {!!Form::label('Observador:')!!}
-{!!Form::select('observador', array('' => '','1' => 'JOSE', '2' => 'MARIO','3' => 'DIEGO'),null,['class'=>'form-control'])!!}
+{!!Form::select('observador',$observadores,null,['class'=>'form-control'])!!}
 </div>

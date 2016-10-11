@@ -31,7 +31,10 @@ class TareaController extends Controller
      */
     public function create()
     {
-          return view('tarea.create');
+  
+    $usuarios = \DB::table('users')->lists('name', 'id');
+    $observadores = \DB::table('users')->lists('name', 'id');
+    return view('tarea.create')->with('usuarios', $usuarios)->with('observadores', $observadores);
 
     }
 
