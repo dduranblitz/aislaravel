@@ -18,8 +18,10 @@ class GrupoTareaController extends Controller
      */
     public function index()
     {
+
+     $integrantesGrupo = \DB::table('integrantes_grupos')->get();   
      $grupoTarea= GrupoTarea::paginate(5);    
-     return view('grupoTarea.index',compact('grupoTarea'));  
+     return view('grupoTarea.index',compact('grupoTarea'))->with('integrantesGrupo', $integrantesGrupo);  
     }
 
     /**

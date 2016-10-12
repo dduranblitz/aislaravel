@@ -39,7 +39,9 @@ Route::get('logout','LogController@logout');
 
 ////////grupo tarea recursos
 Route::resource('grupoTarea', 'GrupoTareaController');
-
+////integrantes grupo recursos
+	
+Route::resource('integrantesGrupo', 'IntegrantesGrupoController');
 
 
 

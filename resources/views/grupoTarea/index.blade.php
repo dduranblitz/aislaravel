@@ -5,12 +5,18 @@
 	<thead>
 		<th>Nombre Grupo</th>
 		<th>Descripcion Grupo</th>
+		<th>Integrantes</th>
 		<th>Acciones</th>
 	</thead>
    @foreach ($grupoTarea as $grupo) 
 	<tbody>
 		<td>{{$grupo->nombre}}</td>
 		<td>{{$grupo->descripcion}}</td>
+		<td>@foreach ($integrantesGrupo as $integrantes)   
+            @if ( $integrantes->idGrupo == $grupo->id)
+                {{DB::table('users')->where('id', $integrantes->idUsuario)->value('name')}} <br>
+             @endif
+            @endforeach</td>
 		<td>
 		{!!link_to_route('grupoTarea.edit', $title = 'Editar', $parameters = $grupo->id, $attributes = ['class'=>'btn btn-primary'])!!}	
 

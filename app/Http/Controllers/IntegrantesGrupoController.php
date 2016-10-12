@@ -1,16 +1,20 @@
-<?php namespace Cinema\Http\Controllers;
+<?php
+
+namespace Cinema\Http\Controllers;
+
+
 use Cinema\Http\Requests;
-use Cinema\Http\Requests\TareaForm;
 use Cinema\Http\Controllers\Controller;
-use Cinema\Tarea;
-use Cinema\User;
-use Illuminate\Http\Request;
+use Cinema\Http\Requests\IntegrantesGrupoRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Routing\Route;
+use Illuminate\Http\Request;
+use Cinema\IntegrantesGrupo;
 
 
-class TareaController extends Controller
+
+
+class IntegrantesGrupoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +23,7 @@ class TareaController extends Controller
      */
     public function index()
     {
-   
-     $tareas= Tarea::paginate(5);    
-     return view('tarea.index',compact('tareas'));   
-     
+        //
     }
 
     /**
@@ -32,11 +33,11 @@ class TareaController extends Controller
      */
     public function create()
     {
-   
+
     $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
     $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
-    return view('tarea.create')->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
-
+    return view("integrantesGrupo.create")->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
+       
     }
 
     /**
@@ -45,45 +46,17 @@ class TareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TareaForm $tareaForm){
-
-    $tarea = new Tarea;
-    $tarea->nombreTarea = \Request::input('nombreTarea');
-    $tarea->tareaCiclica = \Request::input('tareaCiclica');
-  if(\Request::input('tareaCiclica')=='si'){
-   $tarea->fechaInicio =NULL;
-   $tarea->fechaFinal =NULL;
-   $tarea->cicloTarea = \Request::input('cicloTarea');
-  }
-
-if(\Request::input('tareaCiclica')=='no'){
-   $tarea->fechaInicio =\Request::input('fechaInicio');
-   $tarea->fechaFinal =\Request::input('fechaFinal');;
-   $tarea->cicloTarea = NULL;
-}
-
-$tarea->autor  = \Request::input('autor');
-
-$tarea->tipoResponsable = \Request::input('tipoResponsable');
-if(\Request::input('tipoResponsable')=='persona'){
-  $tarea->personaResponsable = \Request::input('personaResponsable');  
-  $tarea->grupoResponsable = NULL;
-}
-
-
-if(\Request::input('tipoResponsable')=='grupo'){
-  $tarea->grupoResponsable = \Request::input('grupoResponsable');  
-  $tarea->personaResponsable = NULL;
-}
-
-$tarea->observador = \Request::input('observador');
-
-$tarea->save();
- Session::flash('message','Tarea creada correctamente' );
- return Redirect::to('/tarea');
-
-
+    public function store(IntegrantesGrupoRequest $integrantesGrupoRequest)
+    {
+         $integrantesGrupo = new IntegrantesGrupo;
+         $integrantesGrupo->idUsuario = \Request::input('idUsuario');
+         $integrantesGrupo->idGrupo = \Request::input('idGrupo');
+         $integrantesGrupo->save();
+         Session::flash('message','Integrante anadido al grupo' );
+         return Redirect::to('/grupoTarea');
     }
+
+
 
     /**
      * Display the specified resource.

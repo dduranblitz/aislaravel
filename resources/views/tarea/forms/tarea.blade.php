@@ -20,7 +20,7 @@
 </div>
 <div class="form-group">
 {!! Form::label('Autor') !!}
-{!! Form::select('autor',$usuarios, null, ['class' => 'form-control']) !!}
+{!! Form::select('autor',array('' => '')+$usuarios, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
 {!!Form::label('Tipo Responsable:')!!}
@@ -35,5 +35,5 @@
 {!!Form::select('grupoResponsable', $grupoTarea,null,['id'=>'grupoResponsable','class'=>'form-control'])!!}</div>
 <div class="form-group">
 {!!Form::label('Observador:')!!}
-{!!Form::select('observador',$usuarios,null,['class'=>'form-control'])!!}
+{!!Form::select('observador',array('' => '')+$usuarios,null,['class'=>'form-control'])!!}
 </div>
