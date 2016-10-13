@@ -95,8 +95,28 @@ $( "#tipoResponsable" ).change(function() {
 
 
 
+///////////agregar integrantes a grupo selects dependientes, añade al select integrantes que no son del grupo
+
+$("#selectIdGrupo").change(function(event){
+   if(event.target.value==''){
+      $("#selectIdUsuario").empty();
+      return false;
+     }
+
+$.get("integrantesGrupo/"+event.target.value+"",function(response,state){
+    $("#selectIdUsuario").empty();
+    console.log(response);
+    for(i=0; i<response.length;i++){
+      $("#selectIdUsuario").append("<option value='"+response[i].id+"'>"+response[i].name+"</option>");
+    }
+  });
+
+});
 
 
 
+
+  
+///document ready fin
  
 });

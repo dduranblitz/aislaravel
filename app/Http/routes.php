@@ -41,6 +41,8 @@ Route::get('logout','LogController@logout');
 Route::resource('grupoTarea', 'GrupoTareaController');
 ////integrantes grupo recursos
 	
+///traer integrantes grupo ajax con jquery	
+Route::get('integrantesGrupo/{id}', 'IntegrantesGrupoController@getIntegrantesGrupo');
 Route::resource('integrantesGrupo', 'IntegrantesGrupoController');
 
 

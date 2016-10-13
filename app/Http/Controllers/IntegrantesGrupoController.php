@@ -2,7 +2,6 @@
 
 namespace Cinema\Http\Controllers;
 
-
 use Cinema\Http\Requests;
 use Cinema\Http\Controllers\Controller;
 use Cinema\Http\Requests\IntegrantesGrupoRequest;
@@ -12,10 +11,8 @@ use Illuminate\Http\Request;
 use Cinema\IntegrantesGrupo;
 
 
-
-
 class IntegrantesGrupoController extends Controller
-{
+  {
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +20,20 @@ class IntegrantesGrupoController extends Controller
      */
     public function index()
     {
-        //
+         $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
+         $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
+         return view("integrantesGrupo.create")->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
     }
+
+
+   public function getIntegrantesGrupo(Request $request, $id){   
+        if($request->ajax()){
+            $integrantesGrupo=IntegrantesGrupo::integrantesPorAgregar($id);
+            return response()->json($integrantesGrupo);    
+         }
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

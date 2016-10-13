@@ -17,7 +17,7 @@ class CreateIntegrantesGruposTable extends Migration
             $table->string('idUsuario',10);
             $table->string('idGrupo',10);
             $table->timestamps();
-            $table->unique(['idUsuario', 'idGrupo']);
+          //  $table->unique(['idUsuario', 'idGrupo']);
         });
     }
 
