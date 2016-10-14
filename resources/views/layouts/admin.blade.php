@@ -82,7 +82,7 @@
                                     <a href="{!!URL::to('/grupoTarea')!!}"><i class='fa fa-list-ol fa-fw'></i>Listar Grupos</a>
                                 </li>
                                   <li>
-                                    <a href="{!!URL::to('/integrantesGrupo')!!}"><i class='fa fa-list-ol fa-fw'></i>Agregar Integrantes Grupos</a>
+                                    <a href="{!!URL::to('/integrantesGrupo')!!}"><i class='fa fa-list-ol fa-fw'></i>Participantes Grupos</a>
                                 </li>
                             </ul>
                         </li> 

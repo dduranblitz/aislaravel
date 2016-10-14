@@ -34,6 +34,14 @@ class IntegrantesGrupoController extends Controller
     }
 
 
+    public function getIntegrantesGrupoEliminar(Request $request, $id){   
+        if($request->ajax()){
+            $integrantesGrupoEliminar=IntegrantesGrupo::integrantesPorEliminar($id);
+            return response()->json($integrantesGrupoEliminar);    
+         }
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -109,6 +117,18 @@ class IntegrantesGrupoController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $idUsuarioEliminar = \Request::input('idUsuarioEliminar');
+         $idGrupoEliminar = \Request::input('idGrupoEliminar');
+         \DB::table('integrantes_grupos')->where('idUsuario', '=', $idUsuarioEliminar)
+                                        ->where('idGrupo', '=', $idGrupoEliminar)
+                                        ->delete();
+         
+         Session::flash('message','Integrante eliminado del grupo' );
+         return Redirect::to('/grupoTarea');
+
+
     }
+
+
+
 }

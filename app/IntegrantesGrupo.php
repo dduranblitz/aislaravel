@@ -45,4 +45,32 @@ class IntegrantesGrupo extends Model
 
 
 
+
+ /////funcion que retorna la matriz de usarios que se pueden eliminar del grupo con $id 
+   public static function integrantesPorEliminar($id){
+        $usuariosGrupo = \DB::table('integrantes_grupos')->select('idUsuario')->where('idGrupo','=',$id)->get();
+        $coleccionIdUsuariosGrupo = collect();
+        $coleccionFinal=collect();
+              
+       ////convertir id usuarios grupo a coleccion
+       foreach ($usuariosGrupo as $grupales){
+            $coleccionIdUsuariosGrupo->push($grupales->idUsuario);  
+        } 
+      
+      
+       ////traer los nombres de los usuarios que no estan en el grupo mediante su id
+        foreach($coleccionIdUsuariosGrupo as $integrantes){
+            $usuario = \DB::table('users')->select('id','name')->where('id','=',$integrantes)->first();
+       	    $name=$usuario->name;
+       	    $id=$usuario->id;
+       	    $coleccionFinal->push(['name'=>$name,'id'=>$id]);
+        } 
+
+      return  $coleccionFinal;
+ }
+
+
+
+
+
 }

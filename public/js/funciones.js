@@ -113,6 +113,27 @@ $.get("integrantesGrupo/"+event.target.value+"",function(response,state){
 
 });
 
+///////////eliminar integrantes a grupo selects dependientes, añade al select integrantes  son del grupo
+
+$("#selectIdGrupoEliminar").change(function(event){
+   if(event.target.value==''){
+      $("#selectIdUsuarioEliminar").empty();
+      return false;
+     }
+
+$.get("integrantesGrupoEliminar/"+event.target.value+"",function(response,state){
+    $("#selectIdUsuarioEliminar").empty();
+    console.log(response);
+    for(i=0; i<response.length;i++){
+      $("#selectIdUsuarioEliminar").append("<option value='"+response[i].id+"'>"+response[i].name+"</option>");
+    }
+  });
+
+});
+
+
+
+
 
 
 
