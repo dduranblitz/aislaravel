@@ -72,7 +72,7 @@ class GrupoTareaController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('grupoTarea.edit')->with('grupo', GrupoTarea::find($id));
     }
 
     /**
@@ -82,10 +82,21 @@ class GrupoTareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, GrupoTareaRequest $grupoTareaRequest)
     {
-        //
+        
+    $grupoTarea = GrupoTarea::find($id);
+    $grupoTarea->nombre = \Request::input('nombre');
+    $grupoTarea->descripcion = \Request::input('descripcion');
+    $grupoTarea->save();
+    Session::flash('message','Grupo editado correctamente' );
+    return Redirect::to('/grupoTarea');
+ 
+
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.

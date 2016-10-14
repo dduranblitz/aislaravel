@@ -50,37 +50,38 @@ class TareaController extends Controller
     $tarea = new Tarea;
     $tarea->nombreTarea = \Request::input('nombreTarea');
     $tarea->tareaCiclica = \Request::input('tareaCiclica');
+  
   if(\Request::input('tareaCiclica')=='si'){
    $tarea->fechaInicio =NULL;
    $tarea->fechaFinal =NULL;
    $tarea->cicloTarea = \Request::input('cicloTarea');
-  }
+   }
 
-if(\Request::input('tareaCiclica')=='no'){
+  if(\Request::input('tareaCiclica')=='no'){
    $tarea->fechaInicio =\Request::input('fechaInicio');
    $tarea->fechaFinal =\Request::input('fechaFinal');;
    $tarea->cicloTarea = NULL;
-}
+  }
 
-$tarea->autor  = \Request::input('autor');
+   $tarea->autor  = \Request::input('autor');
 
-$tarea->tipoResponsable = \Request::input('tipoResponsable');
-if(\Request::input('tipoResponsable')=='persona'){
-  $tarea->personaResponsable = \Request::input('personaResponsable');  
-  $tarea->grupoResponsable = NULL;
-}
+  $tarea->tipoResponsable = \Request::input('tipoResponsable');
+ if(\Request::input('tipoResponsable')=='persona'){
+   $tarea->personaResponsable = \Request::input('personaResponsable');  
+   $tarea->grupoResponsable = NULL;
+  }
 
 
-if(\Request::input('tipoResponsable')=='grupo'){
-  $tarea->grupoResponsable = \Request::input('grupoResponsable');  
-  $tarea->personaResponsable = NULL;
-}
+ if(\Request::input('tipoResponsable')=='grupo'){
+   $tarea->grupoResponsable = \Request::input('grupoResponsable');  
+   $tarea->personaResponsable = NULL;
+ }
 
-$tarea->observador = \Request::input('observador');
+ $tarea->observador = \Request::input('observador');
 
-$tarea->save();
- Session::flash('message','Tarea creada correctamente' );
- return Redirect::to('/tarea');
+ $tarea->save();
+  Session::flash('message','Tarea creada correctamente' );
+  return Redirect::to('/tarea');
 
 
     }
@@ -93,7 +94,7 @@ $tarea->save();
      */
     public function show($id)
     {
-        //
+      
     }
 
     /**
@@ -104,7 +105,9 @@ $tarea->save();
      */
     public function edit($id)
     {
-        //
+        $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
+        $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
+        return view('tarea.edit')->with('tarea', Tarea::find($id))->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
     }
 
     /**
@@ -114,10 +117,47 @@ $tarea->save();
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update($id, TareaForm $tareaForm){
+    
+       $tarea = Tarea::find($id);
+       $tarea->nombreTarea = \Request::input('nombreTarea');
+       $tarea->tareaCiclica = \Request::input('tareaCiclica');
+  
+  if(\Request::input('tareaCiclica')=='si'){
+   $tarea->fechaInicio =NULL;
+   $tarea->fechaFinal =NULL;
+   $tarea->cicloTarea = \Request::input('cicloTarea');
+   }
+
+  if(\Request::input('tareaCiclica')=='no'){
+   $tarea->fechaInicio =\Request::input('fechaInicio');
+   $tarea->fechaFinal =\Request::input('fechaFinal');;
+   $tarea->cicloTarea = NULL;
+  }
+
+   $tarea->autor  = \Request::input('autor');
+   $tarea->tipoResponsable = \Request::input('tipoResponsable');
+ 
+ if(\Request::input('tipoResponsable')=='persona'){
+   $tarea->personaResponsable = \Request::input('personaResponsable');  
+   $tarea->grupoResponsable = NULL;
+  }
+
+ if(\Request::input('tipoResponsable')=='grupo'){
+   $tarea->grupoResponsable = \Request::input('grupoResponsable');  
+   $tarea->personaResponsable = NULL;
+  }
+
+  $tarea->observador = \Request::input('observador');
+
+  $tarea->save();
+  Session::flash('message','Tarea editada correctamente' );
+  return Redirect::to('/tarea');
+
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.
