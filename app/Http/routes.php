@@ -32,7 +32,7 @@ Route::controllers([
 
 ///calendario tareas
 Route::get('calendarioTareas', 'TareaController@getCalendarioTareas');
-
+Route::get('calendarioJsonTareas/', 'TareaController@getCalendarioJsonTareas');
 Route::resource('tarea','TareaController');
 Route::resource('usuario','UsuarioController');
 //////////////////////////////////////////////////////////////

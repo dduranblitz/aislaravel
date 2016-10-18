@@ -180,4 +180,19 @@ class TareaController extends Controller
      
     }
 
+
+
+   public function getCalendarioJsonTareas(Request $request){   
+        if($request->ajax()){
+            $calendarioJsonTareas=Tarea::calendarioJsonTareas();
+            return response()->json($calendarioJsonTareas);    
+         }
+    } 
+
+
+
+
+
+
+
 }

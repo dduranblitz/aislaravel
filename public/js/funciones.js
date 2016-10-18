@@ -135,7 +135,17 @@ $.get("integrantesGrupoEliminar/"+event.target.value+"",function(response,state)
 
 /////calendario
    $('#calendar').fullCalendar({
-        // put your options and callbacks here
+       timeFormat: ' ',
+       events: {
+            url: 'calendarioJsonTareas',
+            type: 'GET', // Send post data
+            error: function() {
+                alert('There was an error while fetching events.');
+            },
+          
+        }
+
+
     })
 
 
