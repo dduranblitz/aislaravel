@@ -133,7 +133,10 @@ $.get("integrantesGrupoEliminar/"+event.target.value+"",function(response,state)
 
 
 
-
+/////calendario
+   $('#calendar').fullCalendar({
+        // put your options and callbacks here
+    })
 
 
 

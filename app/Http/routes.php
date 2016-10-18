@@ -30,6 +30,9 @@ Route::controllers([
 ////agregar la ruta de crear tarea antes de definir el recurso
 ///Route::get('usuario/crearTarea', 'UsuarioController@crearTarea');
 
+///calendario tareas
+Route::get('calendarioTareas', 'TareaController@getCalendarioTareas');
+
 Route::resource('tarea','TareaController');
 Route::resource('usuario','UsuarioController');
 //////////////////////////////////////////////////////////////
@@ -45,6 +48,5 @@ Route::resource('grupoTarea', 'GrupoTareaController');
 Route::get('integrantesGrupoEliminar/{id}', 'IntegrantesGrupoController@getIntegrantesGrupoEliminar');
 Route::get('integrantesGrupo/{id}', 'IntegrantesGrupoController@getIntegrantesGrupo');
 Route::resource('integrantesGrupo', 'IntegrantesGrupoController');
-
 
 

@@ -169,4 +169,15 @@ class TareaController extends Controller
     {
         //
     }
+
+
+
+
+ public function getCalendarioTareas()
+    {
+   
+     return view('tarea.calendarioTareas');   
+     
+    }
+
 }

@@ -11,6 +11,12 @@
     {!!Html::style('css/metisMenu.min.css')!!}
     {!!Html::style('css/sb-admin-2.css')!!}
     {!!Html::style('css/font-awesome.min.css')!!}
+    {!!Html::style('css/fullcalendar.css')!!}
+
+    
+
+
+
 </head>
 
 <body>
@@ -73,7 +79,7 @@
                             </ul>
                         </li> 
                         <li>
-                            <a href="#"><i class="fa fa-folder-open fa-fw"></i> Grupos de Tareas<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-briefcase fa-fw"></i> Grupos de Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="{!!URL::to('/grupoTarea/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
@@ -82,7 +88,15 @@
                                     <a href="{!!URL::to('/grupoTarea')!!}"><i class='fa fa-list-ol fa-fw'></i>Listar Grupos</a>
                                 </li>
                                   <li>
-                                    <a href="{!!URL::to('/integrantesGrupo')!!}"><i class='fa fa-list-ol fa-fw'></i>Participantes Grupos</a>
+                                    <a href="{!!URL::to('/integrantesGrupo')!!}"><i class='fa fa-user fa-fw'></i>Gestionar Participantes</a>
+                                </li>
+                            </ul>
+                        </li> 
+                         <li>
+                            <a href="#"><i class="fa fa-calendar fa-fw"></i> Calendario De Tareas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!!URL::to('/calendarioTareas')!!}"><i class='fa fa-signal fa-fw'></i> Calendario De Tareas</a>
                                 </li>
                             </ul>
                         </li> 
@@ -101,7 +115,11 @@
     </div>
     
 
-    {!!Html::script('js/jquery.min.js')!!}
+
+   
+    {!!Html::script('js/jquery.min.js')!!} 
+    {!!Html::script('js/moment.min.js')!!}
+    {!!Html::script('js/fullcalendar.js')!!}
     {!!Html::script('js/funciones.js')!!}
     {!!Html::script('js/bootstrap.min.js')!!}
     {!!Html::script('js/metisMenu.min.js')!!}
