@@ -24,7 +24,14 @@ class Tarea extends Model
          $end = $calendario->fechaFinal;
          $allDay = false;
        	  
+       	 if($id%2==0){ 
+       	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'color'=>'red']);
+          }
+
+          if($id%2!=0){ 
        	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay]);
+          }
+
         } 
 
       return  $coleccionJsonTareas;
