@@ -13,12 +13,25 @@ class CreateIntegrantesGruposTable extends Migration
     public function up()
     {
         Schema::create('integrantes_grupos', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('idUsuario',10);
-            $table->string('idGrupo',10);
+            $table->integer('idUsuario')->unsigned();
+            $table->integer('idGrupo')->unsigned();
             $table->timestamps();
-          //  $table->unique(['idUsuario', 'idGrupo']);
+            $table->unique(['idUsuario', 'idGrupo']);
         });
+
+
+   Schema::table('integrantes_grupos', function($table) {
+       $table->foreign('idUsuario')->references('id')->on('users')->onDelete('cascade');
+   });
+
+ 
+   Schema::table('integrantes_grupos', function($table) {
+       $table->foreign('idGrupo')->references('id')->on('grupo_tareas')->onDelete('cascade');
+   });
+
+
     }
 
     /**

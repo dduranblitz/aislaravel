@@ -12,7 +12,7 @@ class IntegrantesGrupo extends Model
   /////funcion que retorna la matriz de usarios que faltan por agregar al grupo con $id 
    public static function integrantesPorAgregar($id){
      
-        $usuariosTotales =  \DB::table('users')->select('id')->where('deleted_at','=',NULL)->get();
+        $usuariosTotales =  \DB::table('users')->select('id')->get();
         $usuariosGrupo = \DB::table('integrantes_grupos')->select('idUsuario')->where('idGrupo','=',$id)->get();
 
         ///colecciones a comparar

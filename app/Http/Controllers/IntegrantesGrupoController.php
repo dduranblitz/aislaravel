@@ -20,7 +20,7 @@ class IntegrantesGrupoController extends Controller
      */
     public function index()
     {
-         $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
+         $usuarios = \DB::table('users')->lists('name', 'id');
          $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
          return view("integrantesGrupo.create")->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
     }
@@ -51,7 +51,7 @@ class IntegrantesGrupoController extends Controller
     public function create()
     {
 
-    $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
+    $usuarios = \DB::table('users')->lists('name', 'id');
     $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
     return view("integrantesGrupo.create")->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
        

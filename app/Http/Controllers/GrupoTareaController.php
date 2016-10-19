@@ -106,6 +106,8 @@ class GrupoTareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        \DB::table('grupo_tareas')->where('id', '=', $id)->delete();
+        Session::flash('message','Grupo Eliminado correctamente');
+        return Redirect::to('/grupoTarea');
     }
 }

@@ -19,7 +19,7 @@ class CreateTareasTable extends Migration
             $table->date('fechaInicio')->nullable();
             $table->date('fechaFinal')->nullable();
             $table->string('cicloTarea',50)->nullable();
-            $table->string('autor',100);
+            $table->integer('autor')->unsigned();
             $table->string('tipoResponsable',50);
             $table->string('personaResponsable',100)->nullable();
             $table->string('grupoResponsable',100)->nullable();
@@ -27,7 +27,15 @@ class CreateTareasTable extends Migration
             $table->string('editada',10)->nullable();
             $table->string('estadoTarea',50)->nullable();
             $table->timestamps();
+
         });
+
+
+       Schema::table('tareas', function($table) {
+       $table->foreign('autor')->references('id')->on('users')->onDelete('cascade');
+      });   
+    
+
     }
 
     /**

@@ -56,5 +56,9 @@
 </div>
 {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!}
 {!!Form::close()!!}
+<br>
+{!!Form::open(['route'=>['tarea.destroy',$tarea->id],'method'=>'DELETE'])!!}
+{!!Form::submit('Eliminar',['class'=>'btn btn-danger '])!!}
+{!!Form::close()!!}
 <br><br>
 @stop

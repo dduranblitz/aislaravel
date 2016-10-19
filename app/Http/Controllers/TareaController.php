@@ -33,7 +33,7 @@ class TareaController extends Controller
     public function create()
     {
    
-    $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
+    $usuarios = \DB::table('users')->lists('name', 'id');
     $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
     return view('tarea.create')->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
 
@@ -105,7 +105,7 @@ class TareaController extends Controller
      */
     public function edit($id)
     {
-        $usuarios = \DB::table('users')->where('deleted_at','=',NULL)->lists('name', 'id');
+        $usuarios = \DB::table('users')->lists('name', 'id');
         $grupoTarea = \DB::table('grupo_tareas')->lists('nombre', 'id');
         return view('tarea.edit')->with('tarea', Tarea::find($id))->with('usuarios', $usuarios)->with('grupoTarea', $grupoTarea);
     }
@@ -167,7 +167,9 @@ class TareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+         \DB::table('tareas')->where('id', '=', $id)->delete();
+         Session::flash('message','Tarea Eliminada correctamente');
+         return Redirect::to('/tarea');
     }
 
 
