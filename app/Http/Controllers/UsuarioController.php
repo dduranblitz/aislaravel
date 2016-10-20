@@ -16,7 +16,7 @@ class UsuarioController extends Controller {
 
   public function __construct(){
    $this->middleware('auth');
-   $this->middleware('admin');
+   $this->middleware('admin',['only'=>['create','index']]);
    $this->beforeFilter('@find',['only'=>['edit','update','destroy']]);
     }
 
@@ -58,10 +58,18 @@ class UsuarioController extends Controller {
 	public function store(UserCreateRequest $request)
 	{
 	 
-      User::create($request->all());
+    $usuario = new User;
+    $usuario->name = \Request::input('name');
+    $usuario->email = \Request::input('email');
+    $usuario->password = \Request::input('password');
+    $usuario->rol = \Request::input('rol');
+    $usuario->save();
+    Session::flash('message','Usuario creado correctamente' );
+    return Redirect::to('/usuario');
 
-      Session::flash('message','Usuario guardado correctamente');
-      return Redirect::to('/usuario');
+
+
+      
  
 	}
 
@@ -97,11 +105,14 @@ class UsuarioController extends Controller {
 	public function update($id, UserUpdateRequest $request)
 	{
 	 
-	 $this->user->fill($request->all());
-	 $this->user->save();
-     Session::flash('message','Usuario editado correctamente'
-     	);
-     return Redirect::to('/usuario');
+	$usuario = User::find($id);
+    $usuario->name = \Request::input('name');
+    $usuario->email = \Request::input('email');
+    $usuario->password = \Request::input('password');
+    $usuario->rol = \Request::input('rol');
+    $usuario->save();
+    Session::flash('message','Usuario editado correctamente' );
+    return Redirect::to('/usuario');
 
 	}
 

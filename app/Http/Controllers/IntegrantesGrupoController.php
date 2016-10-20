@@ -18,6 +18,13 @@ class IntegrantesGrupoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+  public function __construct(){
+      $this->middleware('auth');
+       $this->middleware('admin',['only'=>['index']]);
+    }
+
+
     public function index()
     {
          $usuarios = \DB::table('users')->lists('name', 'id');

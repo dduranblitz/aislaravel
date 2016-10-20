@@ -29,8 +29,11 @@
         <td>{{DB::table('grupo_tareas')->where('id', $tarea->grupoResponsable)->value('nombre')}}</td>
         <td>{{DB::table('users')->where('id', $tarea->observador)->value('name')}}</td>
         <td>
-		{!!link_to_route('tarea.edit', $title = 'Editar', $parameters = $tarea->id, $attributes = ['class'=>'btn btn-primary'])!!}	
-
+         @if($rol=='administrador')
+		   {!!link_to_route('tarea.edit', $title = 'Editar', $parameters = $tarea->id, $attributes = ['class'=>'btn btn-primary'])!!}
+		 @elseif($rol=='usuario')
+		  <p style="color:red">No tiene los privilegios</p>	
+         @endif
 		</td>
 	</tbody>
 	@endforeach

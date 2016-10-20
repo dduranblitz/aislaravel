@@ -6,6 +6,10 @@
 {!!Form::label('Tarea ciclica:')!!}
 {!!Form::select('tareaCiclica', array('' => '','si' => 'SI', 'no' => 'NO'),null,['id'=>'tareaCiclica','class'=>'form-control'])!!}
 </div>
+<div class="form-group hidden" id="divCicloTarea">
+{!!Form::label('Ciclo tarea:')!!}
+{!!Form::select('cicloTarea', array('semanal' => 'SEMANAL', 'mensual' => 'MENSUAL','anual' => 'ANUAL'),null,['id'=>'cicloTarea','class'=>'form-control '])!!}
+</div>
 <div class="form-group hidden" id="divFechaInicio" >
 {!!Form::label('Fecha inicio tarea:')!!}
 {!!Form::date('fechaInicio', \Carbon\Carbon::now(), ['id'=>'fechaInicio','class' => 'form-control'])!!}
@@ -13,10 +17,6 @@
 <div class="form-group hidden"  id="divFechaFinal">
 {!!Form::label('Fecha final tarea:')!!}
 {!!Form::date('fechaFinal', \Carbon\Carbon::now(), ['id'=>'fechaFinal','class' => 'form-control'])!!}
-</div>
-<div class="form-group hidden" id="divCicloTarea">
-{!!Form::label('Ciclo tarea:')!!}
-{!!Form::select('cicloTarea', array('semanal' => 'SEMANAL', 'mensual' => 'MENSUAL','anual' => 'ANUAL'),null,['id'=>'cicloTarea','class'=>'form-control '])!!}
 </div>
 <div class="form-group">
 {!! Form::label('Autor') !!}

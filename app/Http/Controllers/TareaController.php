@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Routing\Route;
-
+use Illuminate\Contracts\Auth\Guard;
 
 class TareaController extends Controller
 {
@@ -17,11 +17,23 @@ class TareaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+   protected $authorizacion;
+
+   public function __construct(Guard $auth){
+   $this->authorizacion=$auth; 
+   $this->middleware('auth');
+   $this->middleware('admin',['only'=>['create']]);
+    }
+
+
+
+
     public function index()
     {
    
+     $rol=$this->authorizacion->user()->rol;
      $tareas= Tarea::paginate(5);    
-     return view('tarea.index',compact('tareas'));   
+     return view('tarea.index',compact('tareas'))->with('rol', $rol);   
      
     }
 
@@ -51,16 +63,16 @@ class TareaController extends Controller
     $tarea->nombreTarea = \Request::input('nombreTarea');
     $tarea->tareaCiclica = \Request::input('tareaCiclica');
   
-  if(\Request::input('tareaCiclica')=='si'){
-   $tarea->fechaInicio =NULL;
-   $tarea->fechaFinal =NULL;
-   $tarea->cicloTarea = \Request::input('cicloTarea');
-   }
+     if(\Request::input('tareaCiclica')=='si'){
+         $tarea->fechaInicio =\Request::input('fechaInicio');
+         $tarea->fechaFinal =\Request::input('fechaFinal');
+         $tarea->cicloTarea = \Request::input('cicloTarea');
+     }
 
   if(\Request::input('tareaCiclica')=='no'){
-   $tarea->fechaInicio =\Request::input('fechaInicio');
-   $tarea->fechaFinal =\Request::input('fechaFinal');;
-   $tarea->cicloTarea = NULL;
+     $tarea->fechaInicio =\Request::input('fechaInicio');
+     $tarea->fechaFinal =\Request::input('fechaFinal');
+     $tarea->cicloTarea = NULL;
   }
 
    $tarea->autor  = \Request::input('autor');
@@ -119,19 +131,19 @@ class TareaController extends Controller
      */
     public function update($id, TareaForm $tareaForm){
     
-       $tarea = Tarea::find($id);
-       $tarea->nombreTarea = \Request::input('nombreTarea');
-       $tarea->tareaCiclica = \Request::input('tareaCiclica');
+    $tarea = Tarea::find($id);
+    $tarea->nombreTarea = \Request::input('nombreTarea');
+    $tarea->tareaCiclica = \Request::input('tareaCiclica');
   
   if(\Request::input('tareaCiclica')=='si'){
-   $tarea->fechaInicio =NULL;
-   $tarea->fechaFinal =NULL;
+   $tarea->fechaInicio =\Request::input('fechaInicio');
+   $tarea->fechaFinal =\Request::input('fechaFinal');
    $tarea->cicloTarea = \Request::input('cicloTarea');
    }
 
   if(\Request::input('tareaCiclica')=='no'){
    $tarea->fechaInicio =\Request::input('fechaInicio');
-   $tarea->fechaFinal =\Request::input('fechaFinal');;
+   $tarea->fechaFinal =\Request::input('fechaFinal');
    $tarea->cicloTarea = NULL;
   }
 

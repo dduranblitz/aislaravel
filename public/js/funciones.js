@@ -3,11 +3,10 @@ $( document ).ready(function() {
 ///////funciones de crear tareas
 if($("#tareaCiclica").val()=="si"){
        $( "#divCicloTarea" ).removeClass('hidden');
-         $( "#divFechaInicio" ).addClass('hidden');
-         $( "#divFechaFinal" ).addClass('hidden');
-      
-
-     } 
+       $( "#divFechaInicio" ).removeClass('hidden');
+       $( "#divFechaFinal" ).removeClass('hidden');
+     
+    } 
 
   if($("#tareaCiclica").val()=="no"){
       $( "#divCicloTarea" ).addClass('hidden');
@@ -46,12 +45,10 @@ if($("#tareaCiclica").val()=="si"){
 $( "#tareaCiclica" ).change(function() {
 
   if($("#tareaCiclica").val()=="si"){
-    	 $( "#divCicloTarea" ).removeClass('hidden');
-         $( "#divFechaInicio" ).addClass('hidden');
-         $( "#divFechaFinal" ).addClass('hidden');
-     	
-
-     } 
+      $( "#divCicloTarea" ).removeClass('hidden');
+      $( "#divFechaInicio" ).removeClass('hidden');
+      $( "#divFechaFinal" ).removeClass('hidden');
+ } 
 
   if($("#tareaCiclica").val()=="no"){
    	  $( "#divCicloTarea" ).addClass('hidden');
@@ -68,8 +65,6 @@ $( "#tareaCiclica" ).change(function() {
 
 
 });
-
-
 
 
 ////change select de tipoResponsable

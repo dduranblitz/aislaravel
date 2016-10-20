@@ -12,7 +12,7 @@ class Tarea extends Model
 
  /////funcion que retorna la matriz de tareas json
    public static function calendarioJsonTareas(){
-        $calendarioJsonTareas = \DB::table('tareas')->select('id','nombreTarea','fechaInicio','fechaFinal')->where('tareaCiclica','=','no')->get();
+        $calendarioJsonTareas = \DB::table('tareas')->select('id','nombreTarea','fechaInicio','fechaFinal','tareaCiclica','cicloTarea')->get();
         $coleccionJsonTareas = collect();
         
       
@@ -23,6 +23,11 @@ class Tarea extends Model
          $start = $calendario->fechaInicio;
          $end = $calendario->fechaFinal;
          $allDay = false;
+         if($calendario->tareaCiclica=='si'){
+           $title = $title." / Ciclica / ".$calendario->cicloTarea;
+         }
+
+
        	  
        	 if($id%2==0){ 
        	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'color'=>'red']);

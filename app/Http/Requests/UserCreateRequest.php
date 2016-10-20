@@ -27,6 +27,7 @@ class UserCreateRequest extends Request
                  'name'=>'required',
                  'email'=>'required|unique:users|email',
                  'password'=>'required',
+                 'rol'=>'required',
         ];
     }
 }
