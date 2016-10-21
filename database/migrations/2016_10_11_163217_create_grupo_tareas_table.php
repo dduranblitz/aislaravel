@@ -15,7 +15,7 @@ class CreateGrupoTareasTable extends Migration
         Schema::create('grupo_tareas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre',50);
-            $table->string('descripcion',100)->nullable();;
+            $table->string('descripcion',100)->nullable();
             $table->timestamps();
         });
     }

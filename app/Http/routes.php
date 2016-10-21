@@ -50,3 +50,5 @@ Route::get('integrantesGrupo/{id}', 'IntegrantesGrupoController@getIntegrantesGr
 Route::resource('integrantesGrupo', 'IntegrantesGrupoController');
 
 
+////////seguimiento tareas
+Route::resource('seguimientoTarea', 'SeguimientoTareaController');
