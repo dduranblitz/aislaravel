@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Cinema\GrupoTarea;
 use Cinema\Http\Controllers\Controller;
+use Illuminate\Contracts\Auth\Guard;
 
 class GrupoTareaController extends Controller
 {
@@ -17,7 +18,10 @@ class GrupoTareaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct(){
+    protected $authorizacion;
+
+     public function __construct(Guard $auth){
+      $this->authorizacion=$auth; 
       $this->middleware('auth');
       $this->middleware('admin',['only'=>['create']]);
     }
@@ -27,10 +31,10 @@ class GrupoTareaController extends Controller
 
     public function index()
     {
-
+     $rol=$this->authorizacion->user()->rol;
      $integrantesGrupo = \DB::table('integrantes_grupos')->get();   
      $grupoTarea= GrupoTarea::paginate(5);    
-     return view('grupoTarea.index',compact('grupoTarea'))->with('integrantesGrupo', $integrantesGrupo);  
+     return view('grupoTarea.index',compact('grupoTarea'))->with('integrantesGrupo', $integrantesGrupo)->with('rol',$rol);  
     }
 
     /**

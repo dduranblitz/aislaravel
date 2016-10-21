@@ -18,8 +18,11 @@
              @endif
             @endforeach</td>
 		<td>
+	    @if($rol=='administrador')
 		{!!link_to_route('grupoTarea.edit', $title = 'Editar', $parameters = $grupo->id, $attributes = ['class'=>'btn btn-primary'])!!}	
-
+        @elseif($rol=='usuario')
+        <p style="color:red">No tiene los privilegios</p>
+        @endif	
 		</td>
 	</tbody>
 	@endforeach
