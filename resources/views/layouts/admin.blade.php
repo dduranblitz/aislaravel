@@ -102,6 +102,17 @@
                             </ul>
                         </li> 
                          <li>
+                            <a href="#"><i class="fa fa-pencil fa-fw"></i> Aplazamiento De Tareas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!!URL::to('/aplazamientoTarea/create')!!}"><i class='fa fa-plus fa-fw'></i>Agregar Aplazamiento</a>
+                                </li>
+                                <li>
+                                    <a href="{!!URL::to('/aplazamientoTarea')!!}"><i class='fa fa-signal fa-fw'></i>Aplazamientos Registrados</a>
+                                </li>
+                            </ul>
+                        </li> 
+                         <li>
                             <a href="#"><i class="fa fa-calendar fa-fw"></i> Calendario De Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

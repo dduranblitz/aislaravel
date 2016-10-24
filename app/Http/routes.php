@@ -52,3 +52,7 @@ Route::resource('integrantesGrupo', 'IntegrantesGrupoController');
 
 ////////seguimiento tareas
 Route::resource('seguimientoTarea', 'SeguimientoTareaController');
+
+////aplazamiento tareas
+	
+Route::resource('aplazamientoTarea', 'AplazamientoTareaController');

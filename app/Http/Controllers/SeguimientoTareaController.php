@@ -59,7 +59,7 @@ class SeguimientoTareaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SeguimientotareaRequest $seguimientoTareaRequest)
+    public function store(SeguimientoTareaRequest $seguimientoTareaRequest)
     {
        
          $seguimientoTarea = new SeguimientoTarea;
