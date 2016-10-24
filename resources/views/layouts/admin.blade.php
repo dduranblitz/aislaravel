@@ -60,7 +60,7 @@
                                     <a href="{!!URL::to('/usuario/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                                 </li>
                                 <li>
-                                    <a href="{!!URL::to('/usuario')!!}"><i class='fa fa-list-ol fa-fw'></i> Usuarios</a>
+                                    <a href="{!!URL::to('/usuario')!!}"><i class='fa fa-list-ol fa-fw'></i> Usuarios Registrados</a>
                                 </li>
                             </ul>
                         </li>
@@ -72,7 +72,7 @@
                                     <a href="{!!URL::to('/tarea/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                                 </li>
                                 <li>
-                                    <a href="{!!URL::to('/tarea')!!}"><i class='fa fa-list-ol fa-fw'></i> Tareas</a>
+                                    <a href="{!!URL::to('/tarea')!!}"><i class='fa fa-list-ol fa-fw'></i> Tareas Registradas</a>
                                 </li>
                             </ul>
                         </li> 
@@ -83,7 +83,7 @@
                                     <a href="{!!URL::to('/grupoTarea/create')!!}"><i class='fa fa-plus fa-fw'></i> Agregar</a>
                                 </li>
                                 <li>
-                                    <a href="{!!URL::to('/grupoTarea')!!}"><i class='fa fa-list-ol fa-fw'></i>Listar Grupos</a>
+                                    <a href="{!!URL::to('/grupoTarea')!!}"><i class='fa fa-list-ol fa-fw'></i>Grupos Registrados</a>
                                 </li>
                                   <li>
                                     <a href="{!!URL::to('/integrantesGrupo')!!}"><i class='fa fa-user fa-fw'></i>Gestionar Participantes</a>
@@ -91,13 +91,25 @@
                             </ul>
                         </li> 
                          <li>
-                            <a href="#"><i class="fa fa-calendar fa-fw"></i> Calendario De Tareas<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Seguimiento De Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{!!URL::to('/calendarioTareas')!!}"><i class='fa fa-signal fa-fw'></i> Calendario De Tareas</a>
+                                    <a href="{!!URL::to('/seguimientoTarea/create')!!}"><i class='fa fa-plus fa-fw'></i>Agregar Seguimiento</a>
+                                </li>
+                                <li>
+                                    <a href="{!!URL::to('/seguimientoTarea')!!}"><i class='fa fa-signal fa-fw'></i>Seguimientos Registrados</a>
                                 </li>
                             </ul>
                         </li> 
+                         <li>
+                            <a href="#"><i class="fa fa-calendar fa-fw"></i> Calendario De Tareas<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{!!URL::to('/calendarioTareas')!!}"><i class='fa fa-signal fa-fw'></i> Calendario Registrado</a>
+                                </li>
+                            </ul>
+                        </li> 
+                       
 
 
                     </ul>

@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 use Cinema\Http\Requests;
 use Cinema\Http\Controllers\Controller;
 use Cinema\Http\Requests\SeguimientoTareaRequest;
+use Cinema\Http\Requests\SeguimientoTareaUpdateRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Cinema\SeguimientoTarea;
-
+use Illuminate\Contracts\Auth\Guard;
 
 
 class SeguimientoTareaController extends Controller
@@ -20,9 +21,23 @@ class SeguimientoTareaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+      protected $authorizacion;
+
+     public function __construct(Guard $auth){
+      $this->authorizacion=$auth; 
+      $this->middleware('auth');
+      $this->middleware('admin',['only'=>['create']]);
+    }
+
     public function index()
     {
-        //
+     $rol=$this->authorizacion->user()->rol; 
+     $seguimientos= SeguimientoTarea::paginate(5);    
+     return view('seguimientoTarea.index',compact('seguimientos'))->with('rol',$rol); ;
+
+
     }
 
     /**
@@ -83,7 +98,12 @@ class SeguimientoTareaController extends Controller
      */
     public function edit($id)
     {
-        //
+       $tareas = \DB::table('tareas')->lists('nombreTarea', 'id');
+       $autor = \DB::table('users')->lists('name', 'id');
+       return view('seguimientoTarea.edit')->with('seguimiento', SeguimientoTarea::find($id))->with('tareas', $tareas)->    with('autor', $autor);
+
+
+     
     }
 
     /**
@@ -93,10 +113,23 @@ class SeguimientoTareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, SeguimientoTareaUpdateRequest $seguimientoTareaUpdateRequest)
     {
-        //
+        
+         $seguimientoTarea = SeguimientoTarea::find($id);
+         $seguimientoTarea->idTarea = \Request::input('idTarea');
+         $seguimientoTarea->idAutor = \Request::input('idAutor');
+         $seguimientoTarea->nombreSeguimiento = \Request::input('nombreSeguimiento');
+         $seguimientoTarea->descripcionSeguimiento = \Request::input('descripcionSeguimiento');
+         $seguimientoTarea->fecha = \Request::input('fecha');
+         $seguimientoTarea->save();
+         Session::flash('message','Seguimiento editado correctamente' );
+         return Redirect::to('/seguimientoTarea');
+
     }
+
+    
+
 
     /**
      * Remove the specified resource from storage.
@@ -106,6 +139,8 @@ class SeguimientoTareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+         \DB::table('seguimiento_tareas')->where('id', '=', $id)->delete();
+         Session::flash('message','Seguimiento Eliminado correctamente');
+         return Redirect::to('/seguimientoTarea');
     }
 }

@@ -13,7 +13,7 @@
 </div>
 <div class="form-group">
 {!!Form::label('Descripcion Seguimiento:')!!}
-{!!Form::textarea('descripcionSeguimiento',null,['class'=>'form-control','placeholder'=>'Ingrese la descripcion','size' => '30x5'])!!}
+{!!Form::textarea('descripcionSeguimiento',null,['class'=>'form-control','placeholder'=>'Ingrese la descripcion','size' => '30x4'])!!}
 </div>
 <div class="form-group"  >
 {!!Form::label('Fecha Seguimiento:')!!}
