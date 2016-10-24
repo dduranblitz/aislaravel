@@ -21,10 +21,22 @@ class AplazamientoTareaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   
+
     public function index()
     {
         //
     }
+
+    
+   public function getFechaFinalTarea(Request $request, $id){   
+        if($request->ajax()){
+            $fechaFinalTarea=AplazamientoTarea::fechaFinalTarea($id);
+            return response()->json($fechaFinalTarea);    
+         }
+    }
+
 
     /**
      * Show the form for creating a new resource.

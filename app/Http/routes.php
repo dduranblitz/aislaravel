@@ -33,6 +33,7 @@ Route::controllers([
 ///calendario tareas
 Route::get('calendarioTareas', 'TareaController@getCalendarioTareas');
 Route::get('calendarioJsonTareas/', 'TareaController@getCalendarioJsonTareas');
+
 Route::resource('tarea','TareaController');
 Route::resource('usuario','UsuarioController');
 //////////////////////////////////////////////////////////////
@@ -54,5 +55,6 @@ Route::resource('integrantesGrupo', 'IntegrantesGrupoController');
 Route::resource('seguimientoTarea', 'SeguimientoTareaController');
 
 ////aplazamiento tareas
-	
+////traer fecha final tarea
+Route::get('aplazamientoTarea/fechaFinalTarea/{id}', 'AplazamientoTareaController@getFechaFinalTarea');	
 Route::resource('aplazamientoTarea', 'AplazamientoTareaController');

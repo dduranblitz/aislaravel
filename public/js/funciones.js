@@ -144,8 +144,24 @@ $.get("integrantesGrupoEliminar/"+event.target.value+"",function(response,state)
     })
 
 
+//////////////traer fecha finalizacion tarea by id 
+$("#tareaAplazada").change(function(event){
 
-  
+  if(event.target.value==''){
+      $("#nuevaFechaFinalizacionTarea").val(null);
+        return false;
+      }
+
+
+$.get("fechaFinalTarea/"+event.target.value+"",function(response,state){
+      $("#nuevaFechaFinalizacionTarea").val(response);
+  });
+
+});
+
+
+
+ 
 ///document ready fin
  
 });
