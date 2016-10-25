@@ -144,7 +144,7 @@ $.get("integrantesGrupoEliminar/"+event.target.value+"",function(response,state)
     })
 
 
-//////////////traer fecha finalizacion tarea by id 
+//////////////traer fecha finalizacion tarea by id cuando es creacion aplazamiento
 $("#tareaAplazada").change(function(event){
 
   if(event.target.value==''){
@@ -155,6 +155,23 @@ $("#tareaAplazada").change(function(event){
 
 $.get("fechaFinalTarea/"+event.target.value+"",function(response,state){
       $("#fechaFinalTarea").val(response);
+  });
+
+});
+
+
+//////////////traer fecha finalizacion tarea by id cuando es una edicion de aplazamiento
+$("#tareaAplazadaEdicion").change(function(event){
+
+  if(event.target.value==''){
+      $("#fechaFinalizacionUltima").val(null);
+        return false;
+      }
+
+
+$.get("../fechaFinalTarea/"+event.target.value+"",function(response,state){
+      console.log(response)
+      $("#fechaFinalizacionUltima").val(response);
   });
 
 });

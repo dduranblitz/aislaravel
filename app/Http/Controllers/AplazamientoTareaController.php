@@ -7,6 +7,7 @@ use Cinema\Tarea;
 use Cinema\Http\Requests;
 use Cinema\Http\Controllers\Controller;
 use Cinema\Http\Requests\AplazamientoTareaRequest;
+use Cinema\Http\Requests\AplazamientoTareaUpdateRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Cinema\AplazamientoTarea;
@@ -117,7 +118,9 @@ class AplazamientoTareaController extends Controller
      */
     public function edit($id)
     {
-        //
+       $tareas = \DB::table('tareas')->lists('nombreTarea', 'id');
+       $autor = \DB::table('users')->lists('name', 'id');
+       return view('aplazamientoTarea.edit')->with('aplazamiento', AplazamientoTarea::find($id))->with('tareas', $tareas)->    with('autor', $autor);
     }
 
     /**
@@ -127,9 +130,34 @@ class AplazamientoTareaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AplazamientoTareaUpdateRequest $aplazamientoTareaUpdateRequest, $id)
     {
-        //
+         $aplazamientoTarea = AplazamientoTarea::find($id);
+         $aplazamientoTarea->tarea = \Request::input('tarea');
+         $idTarea=\Request::input('tarea');
+
+         $aplazamientoTarea->fechaFinalizacionInicial = \Request::input('fechaFinalizacionUltima');
+
+         $aplazamientoTarea->fechaFinalizacionUltima = \Request::input('fechaFinalizacionUltimaEdicion');
+         $nuevaFechaFinalTarea = \Request::input('fechaFinalizacionUltimaEdicion');
+
+         $aplazamientoTarea->autor = \Request::input('autor');
+         $aplazamientoTarea->nombreAplazamiento = \Request::input('nombreAplazamiento');
+         $aplazamientoTarea->descripcionAplazamiento = \Request::input('descripcionAplazamiento');
+         $aplazamientoTarea->fecha = \Request::input('fecha');
+        
+         if ($aplazamientoTarea->save()){
+                $tarea = Tarea::find($idTarea); 
+                $tarea->fechaFinal =  $nuevaFechaFinalTarea;
+                $tarea->save();
+             }
+
+
+         Session::flash('message','Aplazamiento editado correctamente' );
+         return Redirect::to('/aplazamientoTarea');
+
+
+
     }
 
     /**
@@ -140,6 +168,8 @@ class AplazamientoTareaController extends Controller
      */
     public function destroy($id)
     {
-        //
+         \DB::table('aplazamiento_tareas')->where('id', '=', $id)->delete();
+         Session::flash('message','Aplazamiento Eliminado correctamente');
+         return Redirect::to('/aplazamientoTarea');
     }
 }
