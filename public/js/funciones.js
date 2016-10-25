@@ -148,13 +148,13 @@ $.get("integrantesGrupoEliminar/"+event.target.value+"",function(response,state)
 $("#tareaAplazada").change(function(event){
 
   if(event.target.value==''){
-      $("#nuevaFechaFinalizacionTarea").val(null);
+      $("#fechaFinalTarea").val(null);
         return false;
       }
 
 
 $.get("fechaFinalTarea/"+event.target.value+"",function(response,state){
-      $("#nuevaFechaFinalizacionTarea").val(response);
+      $("#fechaFinalTarea").val(response);
   });
 
 });

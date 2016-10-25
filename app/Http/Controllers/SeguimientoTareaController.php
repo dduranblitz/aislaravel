@@ -35,7 +35,7 @@ class SeguimientoTareaController extends Controller
     {
      $rol=$this->authorizacion->user()->rol; 
      $seguimientos= SeguimientoTarea::paginate(5);    
-     return view('seguimientoTarea.index',compact('seguimientos'))->with('rol',$rol); ;
+     return view('seguimientoTarea.index',compact('seguimientos'))->with('rol',$rol); 
 
 
     }

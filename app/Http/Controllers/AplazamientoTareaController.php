@@ -3,7 +3,7 @@
 namespace Cinema\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Cinema\Tarea;
 use Cinema\Http\Requests;
 use Cinema\Http\Controllers\Controller;
 use Cinema\Http\Requests\AplazamientoTareaRequest;
@@ -22,11 +22,22 @@ class AplazamientoTareaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-   
+    
+      protected $authorizacion; 
+ 
+      public function __construct(Guard $auth){
+        $this->authorizacion=$auth; 
+        $this->middleware('auth');
+        $this->middleware('admin',['only'=>['create']]);
+    }
+
 
     public function index()
     {
-        //
+     $rol=$this->authorizacion->user()->rol;   
+     $aplazamientos= AplazamientoTarea::paginate(5);    
+     return view('aplazamientoTarea.index',compact('aplazamientos'))->with('rol',$rol);
+
     }
 
     
@@ -61,12 +72,27 @@ class AplazamientoTareaController extends Controller
     {
        
          $aplazamientoTarea = new AplazamientoTarea;
+        
          $aplazamientoTarea->tarea = \Request::input('tarea');
+         $idTarea=\Request::input('tarea');
+         
          $aplazamientoTarea->autor = \Request::input('autor');
          $aplazamientoTarea->nombreAplazamiento = \Request::input('nombreAplazamiento');
          $aplazamientoTarea->descripcionAplazamiento = \Request::input('descripcionAplazamiento');
+         $aplazamientoTarea->fechaFinalizacionInicial = \Request::input('fechaFinalTarea');
+         
+         $aplazamientoTarea->fechaFinalizacionUltima = \Request::input('nuevaFechaFinalTarea');
+         $nuevaFechaFinalTarea = \Request::input('nuevaFechaFinalTarea');
+        
          $aplazamientoTarea->fecha = \Request::input('fecha');
-         $aplazamientoTarea->save();
+        
+         if ($aplazamientoTarea->save()){
+                $tarea = Tarea::find($idTarea); 
+                $tarea->fechaFinal =  $nuevaFechaFinalTarea;
+                $tarea->save();
+             }
+
+
          Session::flash('message','Aplazamiento agregado a tarea' );
          return Redirect::to('/aplazamientoTarea');
 

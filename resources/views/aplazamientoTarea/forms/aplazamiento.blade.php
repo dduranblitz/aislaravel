@@ -1,11 +1,15 @@
 <h2>Agregar Aplazamiento a Tarea</h2>
 <div class="form-group">
-{!!Form::label('Tarea (Seleccione tarea, se cargara la fecha de finalizacion actual):')!!}
+{!!Form::label('Seleccione la Tarea (se cargara la fecha de finalizacion actual abajo):')!!}
 {!!Form::select('tarea',array('' => 'Seleccione la tarea')+$tareas,null,['id'=>'tareaAplazada','class'=>'form-control'])!!}
 </div>
-<div id="nuevaFechaFinalizacion" class="form-group"  >
-{!!Form::label('Nueva Fecha Final Tarea (Se muestra la fecha actual de finalizacion tarea, seleccione una nueva):')!!}
-{!!Form::date('nuevaFechaFinalizacionTarea', null, ['id'=>'nuevaFechaFinalizacionTarea','class' => 'form-control'])!!}
+<div id="divFechaFinalTarea" class="form-group"  >
+{!!Form::label('Fecha actual de finalizacion tarea:')!!}
+{!!Form::date('fechaFinalTarea', null, ['id'=>'fechaFinalTarea','class' => 'form-control', 'readonly' => 'readonly'])!!}
+</div>
+<div id="divNuevaFechaFinal" class="form-group"  >
+{!!Form::label('Nueva Fecha Finalizacion tarea ( seleccione una nueva, la tarea sera actualizada con esta nueva fecha final):')!!}
+{!!Form::date('nuevaFechaFinalTarea', null, ['id'=>'nuevaFechaFinalTarea','class' => 'form-control'])!!}
 </div>
 <div class="form-group">
 {!!Form::label('Autor Aplazamiento:')!!}

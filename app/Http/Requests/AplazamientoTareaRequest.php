@@ -25,7 +25,7 @@ class AplazamientoTareaRequest extends Request
     {
         return [
            "tarea" => "required",
-           "nuevaFechaFinalizacionTarea" => "required",
+           "nuevaFechaFinalTarea" => "required",
            "autor" => "required",
            "nombreAplazamiento" => "required",
            "descripcionAplazamiento" => "required",

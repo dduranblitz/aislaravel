@@ -18,6 +18,8 @@ class CreateAplazamientoTareasTable extends Migration
             $table->integer('autor')->unsigned();
             $table->string('nombreAplazamiento',100);
             $table->string('descripcionAplazamiento',300);
+            $table->date('fechaFinalizacionInicial');
+            $table->date('fechaFinalizacionUltima');
             $table->date('fecha');
             $table->timestamps();
         });

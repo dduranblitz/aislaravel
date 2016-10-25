@@ -5,4 +5,5 @@
 @include('aplazamientoTarea.forms.aplazamiento')
 {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!}
 {!!Form::close()!!}
+<br><br>
 @stop
