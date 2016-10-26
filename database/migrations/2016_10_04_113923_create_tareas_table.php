@@ -14,7 +14,7 @@ class CreateTareasTable extends Migration
     {
         Schema::create('tareas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombreTarea',100);
+            $table->string('nombreTarea',500);
             $table->string('tareaCiclica',10);
             $table->date('fechaInicio')->nullable();
             $table->date('fechaFinal')->nullable();

@@ -1,21 +1,23 @@
 @extends('layouts.admin')
 @include('alerts.success')
 @section('content')
-<table class="table table-responsive" style="width:50%;">
+
+<div class="table-responsive">
+<table class="table" style="width:50px;">
 	<thead>
-		<th>Nombre de Tarea</th>
-		<th>Avance Actual</th>
+		<th>Nombre Tarea</th>
+		<th>Avance</th>
 		<th>Tarea Ciclica</th>
 		<th>Ciclo Tarea</th>
-		<th>Fecha Inicio</th>
-		<th>Fecha Final</th>
-		<th>Autor Tarea</th>
-	    <th>Tipo Responsable</th>
-	    <th>Persona Responsable</th>
-	    <th>Grupo Responsable</th>
-		<th>Observador Tarea</th>
-		<th>Estado Tarea</th>
-		<th>Acciones Tarea</th>
+		<th>Inicio</th>
+		<th>Final</th>
+		<th>Autor</th>
+	    <th>Responsable</th>
+	    <th>Persona Cargo</th>
+	    <th>Grupo Cargo</th>
+		<th>Observador</th>
+		<th>Estado</th>
+		<th>Acciones</th>
     </thead>
    @foreach ($tareas as $tarea) 
 	<tbody>
@@ -51,5 +53,7 @@
 	</tbody>
 	@endforeach
 </table>
+</div>
+
 {!!$tareas->render()!!}
 @stop
