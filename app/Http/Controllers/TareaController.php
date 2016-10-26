@@ -22,7 +22,7 @@ class TareaController extends Controller
    public function __construct(Guard $auth){
    $this->authorizacion=$auth; 
    $this->middleware('auth');
-   $this->middleware('admin',['only'=>['create']]);
+   $this->middleware('admin',['only'=>['create','cambiarEstadoTarea']]);
     }
 
 
@@ -38,6 +38,14 @@ class TareaController extends Controller
     }
 
 
+
+     public function cambiarEstadoTarea()
+    {
+   
+     $tareas= Tarea::paginate(5);    
+     return view('tarea.cambiarEstadoTarea',compact('tareas')); 
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -91,7 +99,10 @@ class TareaController extends Controller
    $tarea->personaResponsable = NULL;
  }
 
- $tarea->observador = \Request::input('observador');
+/////guardar el avance inicial como cero 0%
+  $tarea->avanceTarea=0;
+  $tarea->observador = \Request::input('observador');
+  $tarea->estadoTarea = 1;
 
  $tarea->save();
   Session::flash('message','Tarea creada correctamente' );
@@ -206,7 +217,16 @@ class TareaController extends Controller
     } 
 
 
+  public function setearTareas($id,$idEstado)
+    {    
+        $tarea = Tarea::find($id);
+        $tarea->estadoTarea =$idEstado;
+        $tarea->save();
+        Session::flash('message','Estado Tarea guardado correctamente' );
+        return Redirect::to('tarea');
 
+
+    }
 
 
 

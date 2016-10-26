@@ -4,8 +4,12 @@
 {!! Form::model($seguimiento, ['route' => ['seguimientoTarea.update', $seguimiento->id], 'method' => 'patch']) !!}
 <h2>Agregar Seguimiento a Tarea</h2>
 <div class="form-group">
-{!!Form::label('Tarea:')!!}
-{!!Form::select('idTarea',$tareas,null,['id'=>'tarea','class'=>'form-control'])!!}
+{!!Form::label('Tarea (Seleccione, se cargara el avance actual de la tarea abajo):')!!}
+{!!Form::select('idTarea',$tareas,null,['id'=>'tareaSeguimientoEdicion','class'=>'form-control'])!!}
+</div>
+<div class="form-group">
+{!!Form::label('Avance Tarea (Se carga el actual, Si elige 100% la tarea sera actualizada como finalizada) :')!!}
+{!!Form::select('avanceTarea',array('0' => '0%','5' => '5%','10' => '10%','20' => '20%','30' => '30%','40' => '40%','50' => '50%','60' => '60%','70' => '70%','80' => '80%', '90' => '90%', '100' => '100%' ),$avanceTarea,['id'=>'avanceTarea','class'=>'form-control'])!!}
 </div>
 <div class="form-group">
 {!!Form::label('Autor Seguimiento:')!!}

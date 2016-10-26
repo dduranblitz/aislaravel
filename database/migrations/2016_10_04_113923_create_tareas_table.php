@@ -26,6 +26,7 @@ class CreateTareasTable extends Migration
             $table->string('observador',100)->nullable();
             $table->string('editada',10)->nullable();
             $table->string('estadoTarea',50)->nullable();
+            $table->integer('avanceTarea');
             $table->timestamps();
 
         });

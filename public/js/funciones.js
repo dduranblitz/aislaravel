@@ -177,6 +177,38 @@ $.get("../fechaFinalTarea/"+event.target.value+"",function(response,state){
 });
 
 
+//////////////traer porcentaje de avance tarea cuando crea un seguimiento
+$("#tareaSeguimiento").change(function(event){
+
+  if(event.target.value==''){
+      $("#avanceTarea").val('');
+        return false;
+      }
+
+
+$.get("avanceTarea/"+event.target.value+"",function(response,state){
+      console.log(response)
+      $("#avanceTarea").val(response);
+  });
+
+});
+
+//////////////traer porcentaje de avance tarea cuando edita un seguimiento
+$("#tareaSeguimientoEdicion").change(function(event){
+
+  if(event.target.value==''){
+      $("#avanceTarea").val('');
+        return false;
+      }
+
+
+$.get("../avanceTarea/"+event.target.value+"",function(response,state){
+      console.log(response)
+      $("#avanceTarea").val(response);
+  });
+
+});
+
 
  
 ///document ready fin

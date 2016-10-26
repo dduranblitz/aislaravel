@@ -5,4 +5,5 @@
 @include('seguimientoTarea.forms.seguimiento')
 {!!Form::submit('Registrar',['class'=>'btn btn-primary'])!!}
 {!!Form::close()!!}
+<br><br>
 @stop

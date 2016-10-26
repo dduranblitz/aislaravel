@@ -11,6 +11,7 @@ use Cinema\Http\Requests\SeguimientoTareaUpdateRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Cinema\SeguimientoTarea;
+use Cinema\Tarea;
 use Illuminate\Contracts\Auth\Guard;
 
 
@@ -40,6 +41,16 @@ class SeguimientoTareaController extends Controller
 
     }
 
+    
+     public function getAvanceTarea(Request $request, $id){   
+        if($request->ajax()){
+            $avanceTarea=SeguimientoTarea::avanceTarea($id);
+            return response()->json($avanceTarea);    
+         }
+    }
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -64,11 +75,21 @@ class SeguimientoTareaController extends Controller
        
          $seguimientoTarea = new SeguimientoTarea;
          $seguimientoTarea->idTarea = \Request::input('tarea');
+         $idTarea=\Request::input('tarea');
+
+      
          $seguimientoTarea->idAutor = \Request::input('autor');
          $seguimientoTarea->nombreSeguimiento = \Request::input('nombreSeguimiento');
          $seguimientoTarea->descripcionSeguimiento = \Request::input('descripcionSeguimiento');
          $seguimientoTarea->fecha = \Request::input('fecha');
-         $seguimientoTarea->save();
+         
+   
+         if ($seguimientoTarea->save()){
+                $tarea = Tarea::find($idTarea); 
+                $tarea->avanceTarea = \Request::input('avanceTarea');
+                $tarea->save();
+             }
+
          Session::flash('message','Seguimiento agregado a tarea' );
          return Redirect::to('/seguimientoTarea');
 
@@ -100,7 +121,15 @@ class SeguimientoTareaController extends Controller
     {
        $tareas = \DB::table('tareas')->lists('nombreTarea', 'id');
        $autor = \DB::table('users')->lists('name', 'id');
-       return view('seguimientoTarea.edit')->with('seguimiento', SeguimientoTarea::find($id))->with('tareas', $tareas)->    with('autor', $autor);
+
+       $seguimientoEdicion =\DB::table('seguimiento_tareas')->select('idTarea')->where('id','=',$id)->first();
+       $idTarea = $seguimientoEdicion->idTarea;
+
+       $tareaEdicion = \DB::table('tareas')->select('avanceTarea')->where('id','=',$idTarea)->first();
+       $avanceTarea=$tareaEdicion->avanceTarea;
+
+
+       return view('seguimientoTarea.edit')->with('seguimiento', SeguimientoTarea::find($id))->with('tareas', $tareas)->    with('autor', $autor)->with('avanceTarea', $avanceTarea);
 
 
      
@@ -117,12 +146,24 @@ class SeguimientoTareaController extends Controller
     {
         
          $seguimientoTarea = SeguimientoTarea::find($id);
+
          $seguimientoTarea->idTarea = \Request::input('idTarea');
+         $idTarea=\Request::input('idTarea');
+
          $seguimientoTarea->idAutor = \Request::input('idAutor');
+         
          $seguimientoTarea->nombreSeguimiento = \Request::input('nombreSeguimiento');
          $seguimientoTarea->descripcionSeguimiento = \Request::input('descripcionSeguimiento');
          $seguimientoTarea->fecha = \Request::input('fecha');
-         $seguimientoTarea->save();
+        
+
+          if ($seguimientoTarea->save()){
+                $tarea = Tarea::find($idTarea); 
+                $tarea->avanceTarea = \Request::input('avanceTarea');
+                $tarea->save();
+             }
+
+
          Session::flash('message','Seguimiento editado correctamente' );
          return Redirect::to('/seguimientoTarea');
 

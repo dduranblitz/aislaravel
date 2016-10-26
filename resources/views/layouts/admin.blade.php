@@ -77,6 +77,14 @@
                             </ul>
                         </li> 
                         <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i>Aprobar-Rechazar-Finalizar<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                               <li>
+                                    <a href="{!!URL::to('/tarea/cambiarEstadoTarea')!!}"><i class='fa fa-list-ol fa-fw'></i>Cambiar Estado Tarea</a>
+                                </li>
+                            </ul>
+                        </li> 
+                        <li>
                             <a href="#"><i class="fa fa-briefcase fa-fw"></i> Grupos de Tareas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -91,13 +99,13 @@
                             </ul>
                         </li> 
                          <li>
-                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Seguimiento De Tareas<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i>Avances y Seguimientos <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="{!!URL::to('/seguimientoTarea/create')!!}"><i class='fa fa-plus fa-fw'></i>Agregar Seguimiento</a>
+                                    <a href="{!!URL::to('/seguimientoTarea/create')!!}"><i class='fa fa-plus fa-fw'></i>Agregar</a>
                                 </li>
                                 <li>
-                                    <a href="{!!URL::to('/seguimientoTarea')!!}"><i class='fa fa-signal fa-fw'></i>Seguimientos Registrados</a>
+                                    <a href="{!!URL::to('/seguimientoTarea')!!}"><i class='fa fa-signal fa-fw'></i>Registrados</a>
                                 </li>
                             </ul>
                         </li> 

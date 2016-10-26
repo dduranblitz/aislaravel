@@ -25,6 +25,7 @@ class SeguimientoTareaRequest extends Request
     {
         return [
            "tarea" => "required",
+           "avanceTarea" => "required",
            "autor" => "required",
            "nombreSeguimiento" => "required",
            "descripcionSeguimiento" => "required",

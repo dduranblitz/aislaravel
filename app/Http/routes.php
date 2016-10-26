@@ -12,7 +12,6 @@
 */
 
 
-Route::get('controlador','PruebaController@index');
 
 
 Route::get('/', 'FrontController@index');
@@ -34,6 +33,10 @@ Route::controllers([
 Route::get('calendarioTareas', 'TareaController@getCalendarioTareas');
 Route::get('calendarioJsonTareas/', 'TareaController@getCalendarioJsonTareas');
 
+
+
+Route::get('tarea/setearTareas/{id}/{idEstado}', ['as' => 'tarea.setear', 'uses' => 'TareaController@setearTareas']);
+Route::get('tarea/cambiarEstadoTarea', 'TareaController@cambiarEstadoTarea');
 Route::resource('tarea','TareaController');
 Route::resource('usuario','UsuarioController');
 //////////////////////////////////////////////////////////////
@@ -52,6 +55,7 @@ Route::resource('integrantesGrupo', 'IntegrantesGrupoController');
 
 
 ////////seguimiento tareas
+Route::get('seguimientoTarea/avanceTarea/{id}', 'SeguimientoTareaController@getAvanceTarea');	
 Route::resource('seguimientoTarea', 'SeguimientoTareaController');
 
 ////aplazamiento tareas
