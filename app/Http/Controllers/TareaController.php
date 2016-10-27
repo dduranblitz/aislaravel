@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Routing\Route;
 use Illuminate\Contracts\Auth\Guard;
-
+use Mail;
 class TareaController extends Controller
 {
     /**
@@ -90,6 +90,7 @@ class TareaController extends Controller
   $tarea->tipoResponsable = \Request::input('tipoResponsable');
  if(\Request::input('tipoResponsable')=='persona'){
    $tarea->personaResponsable = \Request::input('personaResponsable');  
+   $idPersonaResponsable=\Request::input('personaResponsable');
    $tarea->grupoResponsable = NULL;
   }
 
@@ -102,15 +103,42 @@ class TareaController extends Controller
 /////guardar el avance inicial como cero 0%
   $tarea->avanceTarea=0;
   $tarea->observador = \Request::input('observador');
+  ////tarea sin aprobar
   $tarea->estadoTarea = 1;
 
- $tarea->save();
-  Session::flash('message','Tarea creada correctamente' );
-  return Redirect::to('/tarea');
+
+/////enviar correos notificacion
+   if( $tarea->save() ) {
+    
+     ////enviar a personas 
+   if(\Request::input('tipoResponsable')=='persona'){
+       $email = \DB::table('users')->where('id', $idPersonaResponsable)->value('email');
+       $autorTarea = \DB::table('users')->where('id', \Request::input('autor') )->value('name');
+    
+       Mail::send('emails.contact' , ['nombreTarea'=>\Request::input('nombreTarea'),
+                                      'fechaInicio'=>\Request::input('fechaInicio'),
+                                      'autorTarea'=>$autorTarea
+
+                                     ], function($msj) use($email){
+                                      $msj->subject('Tarea Asginada o modificada para usted en AIS');
+                                      $msj->to($email);
+                                         });  
+
+             }
+
+
+      
+
+
+
+    Session::flash('message','Tarea creada correctamente' );
+     return Redirect::to('/tarea');
 
 
     }
 
+}
+ 
     /**
      * Display the specified resource.
      *
@@ -221,6 +249,9 @@ class TareaController extends Controller
     {    
         $tarea = Tarea::find($id);
         $tarea->estadoTarea =$idEstado;
+        if($idEstado==4){
+          $tarea->avanceTarea =100;
+        }
         $tarea->save();
         Session::flash('message','Estado Tarea guardado correctamente' );
         return Redirect::to('tarea');

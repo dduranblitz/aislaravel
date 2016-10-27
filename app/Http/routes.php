@@ -62,3 +62,7 @@ Route::resource('seguimientoTarea', 'SeguimientoTareaController');
 ////traer fecha final tarea
 Route::get('aplazamientoTarea/fechaFinalTarea/{id}', 'AplazamientoTareaController@getFechaFinalTarea');	
 Route::resource('aplazamientoTarea', 'AplazamientoTareaController');
+
+///email 
+Route::get('mail/enviarCorreo', 'MailController@enviarCorreo');	
+Route::resource('mail', 'MailController');

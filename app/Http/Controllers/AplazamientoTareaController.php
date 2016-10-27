@@ -57,7 +57,7 @@ class AplazamientoTareaController extends Controller
      */
     public function create()
     {
-       $tareas = \DB::table('tareas')->lists('nombreTarea', 'id');
+       $tareas = \DB::table('tareas')->where('estadoTarea','=',2)->lists('nombreTarea', 'id');
        $autor = \DB::table('users')->lists('name', 'id');
        return view("aplazamientoTarea.create")->with('tareas', $tareas)->with('autor', $autor);
     }
@@ -118,7 +118,7 @@ class AplazamientoTareaController extends Controller
      */
     public function edit($id)
     {
-       $tareas = \DB::table('tareas')->lists('nombreTarea', 'id');
+       $tareas = \DB::table('tareas')->where('estadoTarea','=',2)->lists('nombreTarea', 'id');
        $autor = \DB::table('users')->lists('name', 'id');
        return view('aplazamientoTarea.edit')->with('aplazamiento', AplazamientoTarea::find($id))->with('tareas', $tareas)->    with('autor', $autor);
     }

@@ -24,6 +24,7 @@ class SeguimientoTareaUpdateRequest extends Request
     public function rules()
     {
         return [
+           "idTarea" => "required",
            "nombreSeguimiento" => "required",
            "descripcionSeguimiento" => "required",
            "fecha" => "required",

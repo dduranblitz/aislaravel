@@ -59,7 +59,7 @@ class SeguimientoTareaController extends Controller
     public function create()
     {
     
-       $tareas = \DB::table('tareas')->lists('nombreTarea', 'id');
+       $tareas = \DB::table('tareas')->where('estadoTarea','=',2)->lists('nombreTarea', 'id');
        $autor = \DB::table('users')->lists('name', 'id');
        return view("seguimientoTarea.create")->with('tareas', $tareas)->with('autor', $autor);
     }
@@ -87,6 +87,11 @@ class SeguimientoTareaController extends Controller
          if ($seguimientoTarea->save()){
                 $tarea = Tarea::find($idTarea); 
                 $tarea->avanceTarea = \Request::input('avanceTarea');
+                  
+                if(\Request::input('avanceTarea')=='100'){
+                  $tarea->estadoTarea=4;  
+                }  
+
                 $tarea->save();
              }
 
@@ -119,7 +124,7 @@ class SeguimientoTareaController extends Controller
      */
     public function edit($id)
     {
-       $tareas = \DB::table('tareas')->lists('nombreTarea', 'id');
+       $tareas = \DB::table('tareas')->where('estadoTarea','=',2)->lists('nombreTarea', 'id');
        $autor = \DB::table('users')->lists('name', 'id');
 
        $seguimientoEdicion =\DB::table('seguimiento_tareas')->select('idTarea')->where('id','=',$id)->first();
@@ -160,7 +165,13 @@ class SeguimientoTareaController extends Controller
           if ($seguimientoTarea->save()){
                 $tarea = Tarea::find($idTarea); 
                 $tarea->avanceTarea = \Request::input('avanceTarea');
-                $tarea->save();
+                
+                 if(\Request::input('avanceTarea')=='100'){
+                  $tarea->estadoTarea=4;  
+                  }  
+                 $tarea->save();
+
+                  
              }
 
 
