@@ -115,7 +115,7 @@ class TareaController extends Controller
        $email = \DB::table('users')->where('id', $idPersonaResponsable)->value('email');
        $autorTarea = \DB::table('users')->where('id', \Request::input('autor') )->value('name');
     
-       Mail::send('emails.contact' , ['nombreTarea'=>\Request::input('nombreTarea'),
+       Mail::send('emails.tareaIndividual' , ['nombreTarea'=>\Request::input('nombreTarea'),
                                       'fechaInicio'=>\Request::input('fechaInicio'),
                                       'autorTarea'=>$autorTarea
 
@@ -127,15 +127,32 @@ class TareaController extends Controller
              }
 
 
+////enviar a personas integrantes de grupo
+  if(\Request::input('tipoResponsable')=='grupo'){
+       $integrantes_grupo = \DB::table('integrantes_grupos')->where('idGrupo', \Request::input('grupoResponsable'))->get();
+       $autorTarea = \DB::table('users')->where('id', \Request::input('autor') )->value('name');
+    
       
+      foreach ($integrantes_grupo as $integrante) { 
+            $email = \DB::table('users')->where('id', $integrante->idUsuario)->value('email');
+            Mail::send('emails.tareaGrupal' , ['nombreTarea'=>\Request::input('nombreTarea'),
+                                           'fechaInicio'=>\Request::input('fechaInicio'),
+                                           'autorTarea'=>$autorTarea
 
+                                     ], function($msj) use($email){
+                                      $msj->subject('Tarea grupal Asginada o modificada para usted en AIS');
+                                      $msj->to($email);
+                                         });  
+                 }
+            
 
-
-    Session::flash('message','Tarea creada correctamente' );
-     return Redirect::to('/tarea');
-
+             }           
 
     }
+
+
+     Session::flash('message','Tarea creada correctamente' );
+     return Redirect::to('/tarea');  
 
 }
  
@@ -193,6 +210,7 @@ class TareaController extends Controller
  
  if(\Request::input('tipoResponsable')=='persona'){
    $tarea->personaResponsable = \Request::input('personaResponsable');  
+   $idPersonaResponsable=\Request::input('personaResponsable');
    $tarea->grupoResponsable = NULL;
   }
 
@@ -203,7 +221,55 @@ class TareaController extends Controller
 
   $tarea->observador = \Request::input('observador');
 
-  $tarea->save();
+  
+  /////enviar correos notificacion
+   if( $tarea->save() ) {
+    
+     ////enviar a personas 
+   if(\Request::input('tipoResponsable')=='persona'){
+       $email = \DB::table('users')->where('id', $idPersonaResponsable)->value('email');
+       $autorTarea = \DB::table('users')->where('id', \Request::input('autor') )->value('name');
+    
+       Mail::send('emails.tareaIndividual' , ['nombreTarea'=>\Request::input('nombreTarea'),
+                                      'fechaInicio'=>\Request::input('fechaInicio'),
+                                      'autorTarea'=>$autorTarea
+
+                                     ], function($msj) use($email){
+                                      $msj->subject('Tarea Asginada o modificada para usted en AIS');
+                                      $msj->to($email);
+                                         });  
+
+             }
+
+
+
+    ////enviar a personas integrantes de grupo
+  if(\Request::input('tipoResponsable')=='grupo'){
+       $integrantes_grupo = \DB::table('integrantes_grupos')->where('idGrupo', \Request::input('grupoResponsable'))->get();
+       $autorTarea = \DB::table('users')->where('id', \Request::input('autor') )->value('name');
+    
+      
+      foreach ($integrantes_grupo as $integrante) { 
+            $email = \DB::table('users')->where('id', $integrante->idUsuario)->value('email');
+            Mail::send('emails.tareaGrupal' , ['nombreTarea'=>\Request::input('nombreTarea'),
+                                               'fechaInicio'=>\Request::input('fechaInicio'),
+                                                'autorTarea'=>$autorTarea
+
+                                     ], function($msj) use($email){
+                                      $msj->subject('Tarea grupal Asginada o modificada para usted en AIS');
+                                      $msj->to($email);
+                                         });  
+                 }
+            
+
+             }     
+
+
+
+    }
+
+
+
   Session::flash('message','Tarea editada correctamente' );
   return Redirect::to('/tarea');
 

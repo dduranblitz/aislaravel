@@ -44,9 +44,9 @@ class MailController extends Controller
     public function store(Request $request)
     {
     
-      Mail::send('emails.contact','fddfdfddgffg',function($msj){
+      Mail::send('emails.contact',['nombre'=>'juan','apellido'=>'duarte',function($msj){
         $msj->subject('Correo de prueba');
-        $msj->to('shakadevirgo780@hotmail.com');
+        $msj->to('dduran@blitzengineers.com');
 
         Session::flash('message','Mensaje enviado correctamente');
         return Redirect::to('tarea');
@@ -60,9 +60,9 @@ class MailController extends Controller
     public function enviarCorreo()
     {
     
-        Mail::send('emails.contact' ,['nombre'=>'diego','apellido'=>'duran'],function($msj){
+        Mail::send('emails.contact' ,['nombre'=>'juan','apellido'=>'duarte'],function($msj){
         $msj->subject('Correo de prueba');
-        $msj->to('shakadevirgo780@hotmail.com');
+        $msj->to('dduran@blitzengineers.com');
 
         Session::flash('message','Mensaje enviado correctamente');
         return Redirect::to('/tarea');
