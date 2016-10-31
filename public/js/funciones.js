@@ -286,6 +286,30 @@ if(filtro=='fecha'){
 
  
 /////////////////////filtrar calendario con los selects
+$( "#tipoFiltroTarea" ).change(function() {
+  if($("#tipoFiltroTarea").val()=="filtroEstado"){
+        $( "#divFiltroEstado" ).removeClass('hidden');
+        $( "#divFiltroAutor" ).addClass('hidden');
+        $( "#divFiltroFecha" ).addClass('hidden');
+       } 
+
+  if($("#tipoFiltroTarea").val()=="filtroAutor"){
+        $( "#divFiltroEstado" ).addClass('hidden');
+        $( "#divFiltroAutor" ).removeClass('hidden');
+        $( "#divFiltroFecha" ).addClass('hidden');
+       } 
+
+  if($("#tipoFiltroTarea").val()=="filtroFecha"){
+        $( "#divFiltroEstado" ).addClass('hidden');
+        $( "#divFiltroAutor" ).addClass('hidden');
+        $( "#divFiltroFecha" ).removeClass('hidden');
+       } 
+      
+     
+
+
+});
+
 $( "#estadoTareaFiltrar" ).change(function() {
  cargarCalendarioFiltrado('estado');
 });
