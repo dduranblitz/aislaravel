@@ -297,7 +297,8 @@ class TareaController extends Controller
  public function getCalendarioTareas()
     {
    
-     return view('tarea.calendarioTareas');   
+     $usuarios = \DB::table('users')->lists('name', 'id'); 
+     return view('tarea.calendarioTareas')->with('usuarios', $usuarios);   
      
     }
 

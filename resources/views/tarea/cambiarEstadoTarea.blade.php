@@ -27,7 +27,7 @@
          {!!link_to_route('tarea.setear', $title = 'Rechazar', $parameters = [$tarea->id, 3 ], $attributes = ['class'=>'btn btn-primary'])!!}
         @endif 
         @if($tarea->estadoTarea==2)
-         {!!link_to_route('tarea.setear', $title = 'Finalizar', $parameters = [$tarea->id, 4 ], $attributes = ['class'=>'btn btn-primary'])!!}
+         {!!link_to_route('tarea.setear', $title = 'Finalizar', $parameters = [$tarea->id, 4 ], $attributes = ['class'=>'btn btn-primary'])!!} (Si elige finalizar, el avance tarea sera actualizado al 100%)
         @endif
 		</td>
 	</tbody>

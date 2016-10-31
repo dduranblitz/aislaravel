@@ -210,7 +210,96 @@ $.get("../avanceTarea/"+event.target.value+"",function(response,state){
 });
 
 
+function cargarCalendarioFiltrado(filtro) {
+ estadoTareaId=$( "#estadoTareaFiltrar" ).val();
+ autorTareaId=$( "#autorTareaFiltrar" ).val();
+ fechaInicio=$( "#fechaInicioFiltro" ).val();
+ fechaFin=$( "#fechaFinalFiltro" ).val();
+
+ $('#calendar').fullCalendar( 'removeEvents');
+ $.get("calendarioJsonTareas",function(response,state){
+    
+ for (var i = 0; i <= response.length; i++) {
+       elemento = response[i];
+       titulo = elemento.title;
+       start = elemento.start;
+       end = elemento.end;
+       color = elemento.color;
+       
+
+ /////////filtrar por estado tarea
+  if(filtro=='estado'){
+   if(elemento.estadoTareaId==estadoTareaId){
+   var newEvent = {
+                title: titulo,
+                start: start,
+                end: end,
+                color : color
+            };
+   $('#calendar').fullCalendar( 'renderEvent', newEvent ); 
+  }
+}
+  
+///////si filtro tarea es por autor tarea
+ if(filtro=='autor'){
+   if(elemento.autorTareaId==autorTareaId){
+   var newEvent = {
+                title: titulo,
+                start: start,
+                end: end,
+                color : color
+            };
+   $('#calendar').fullCalendar( 'renderEvent', newEvent ); 
+  }
+}
+
+//////////////////////////si filtro es por fecha
+if(filtro=='fecha'){
+   if(elemento.start>=fechaInicio && elemento.end<=fechaFin){
+   var newEvent = {
+                title: titulo,
+                start: start,
+                end: end,
+                color : color
+            };
+   $('#calendar').fullCalendar( 'renderEvent', newEvent ); 
+  }
+}
+
+
+
+}
+
+
+    
+
+  
+
+}); 
+     
  
+ 
+ 
+
+
+}
+
+ 
+/////////////////////filtrar calendario con los selects
+$( "#estadoTareaFiltrar" ).change(function() {
+ cargarCalendarioFiltrado('estado');
+});
+
+$( "#autorTareaFiltrar" ).change(function() {
+ cargarCalendarioFiltrado('autor');
+});
+
+
+$( "#filtrarFechaBtn" ).click(function() {
+  cargarCalendarioFiltrado('fecha');
+});
+
+
 ///document ready fin
  
 });

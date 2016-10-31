@@ -12,17 +12,27 @@ class Tarea extends Model
 
  /////funcion que retorna la matriz de tareas json
    public static function calendarioJsonTareas(){
-        $calendarioJsonTareas = \DB::table('tareas')->select('id','nombreTarea','fechaInicio','fechaFinal','tareaCiclica','cicloTarea','autor','tipoResponsable','personaResponsable','grupoResponsable')->get();
+        $calendarioJsonTareas = \DB::table('tareas')->select('id','nombreTarea','fechaInicio','fechaFinal','tareaCiclica','cicloTarea','autor','tipoResponsable','personaResponsable','grupoResponsable','estadoTarea','estadoTarea')->get();
         $coleccionJsonTareas = collect();
         
       
        ////armar coleccion
         foreach($calendarioJsonTareas as $calendario){
+
          $id = $calendario->id;
          $title = $calendario->nombreTarea;
          $start = $calendario->fechaInicio;
+         $estadoTareaId = $calendario->estadoTarea;
+         $autorTareaId = $calendario->autor;
          $end = $calendario->fechaFinal;
          $allDay = false;
+
+         $estadoTarea='';
+         if($calendario->estadoTarea==1){ $estadoTarea='Sin Aprobar';}
+         if($calendario->estadoTarea==2){ $estadoTarea='Aprobada';}
+         if($calendario->estadoTarea==3){ $estadoTarea='Rechazada';}
+         if($calendario->estadoTarea==4){ $estadoTarea='Finalizada';}     
+
          if($calendario->tareaCiclica=='si'){
            $title = $title." | Ciclica : ".$calendario->cicloTarea;
          }
@@ -41,13 +51,15 @@ class Tarea extends Model
            $title = $title." | G. Responsable : ".$grupoResponsable->nombre;
 
          }
+
+          $title = $title." | Estado : ".$estadoTarea;
        	  
        	 if($id%2==0){ 
-       	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'color'=>'red']);
+       	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'color'=>'red','estadoTareaId'=>$estadoTareaId, 'autorTareaId'=>$autorTareaId]);
           }
 
           if($id%2!=0){ 
-       	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay]);
+       	$coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'estadoTareaId'=>$estadoTareaId,'autorTareaId'=>$autorTareaId]);
           }
 
         } 
