@@ -25,6 +25,8 @@ class Tarea extends Model
          $estadoTareaId = $calendario->estadoTarea;
          $autorTareaId = $calendario->autor;
          $end = $calendario->fechaFinal;
+         $personaResponsableId= $calendario->personaResponsable;
+         $grupoResponsableId= $calendario->grupoResponsable;
          $allDay = false;
 
          $estadoTarea='';
@@ -55,11 +57,11 @@ class Tarea extends Model
           $title = $title." | Estado : ".$estadoTarea;
        	  
        	 if($id%2==0){ 
-       	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'color'=>'red','estadoTareaId'=>$estadoTareaId, 'autorTareaId'=>$autorTareaId]);
+       	 $coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'color'=>'red','estadoTareaId'=>$estadoTareaId, 'autorTareaId'=>$autorTareaId, 'personaResponsableId'=>$personaResponsableId,'grupoResponsableId'=>$grupoResponsableId]);
           }
 
           if($id%2!=0){ 
-       	$coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'estadoTareaId'=>$estadoTareaId,'autorTareaId'=>$autorTareaId]);
+       	$coleccionJsonTareas->push(['id'=>$id,'title'=>$title,'start'=>$start,'end'=>$end,'allDay'=>$allDay,'estadoTareaId'=>$estadoTareaId,'autorTareaId'=>$autorTareaId,'personaResponsableId'=>$personaResponsableId,'grupoResponsableId'=>$grupoResponsableId]);
           }
 
         } 

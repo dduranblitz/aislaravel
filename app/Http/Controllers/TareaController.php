@@ -298,7 +298,8 @@ class TareaController extends Controller
     {
    
      $usuarios = \DB::table('users')->lists('name', 'id'); 
-     return view('tarea.calendarioTareas')->with('usuarios', $usuarios);   
+     $grupos = \DB::table('grupo_tareas')->lists('nombre', 'id'); 
+     return view('tarea.calendarioTareas')->with('usuarios', $usuarios)->with('grupos', $grupos);   
      
     }
 

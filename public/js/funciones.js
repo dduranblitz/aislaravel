@@ -215,9 +215,12 @@ function cargarCalendarioFiltrado(filtro) {
  autorTareaId=$( "#autorTareaFiltrar" ).val();
  fechaInicio=$( "#fechaInicioFiltro" ).val();
  fechaFin=$( "#fechaFinalFiltro" ).val();
+ personaResponsableId=$( "#personaResponsableTareaFiltrar" ).val();
+ grupoResponsableId=$( "#grupoResponsableTareaFiltrar" ).val();
 
  $('#calendar').fullCalendar( 'removeEvents');
  $.get("calendarioJsonTareas",function(response,state){
+  console.log(response);
     
  for (var i = 0; i <= response.length; i++) {
        elemento = response[i];
@@ -266,6 +269,32 @@ if(filtro=='fecha'){
   }
 }
 
+///////////filtro por persona responsable
+if(filtro=='personaResponsable'){
+   if(elemento.personaResponsableId==personaResponsableId){
+   var newEvent = {
+                title: titulo,
+                start: start,
+                end: end,
+                color : color
+            };
+   $('#calendar').fullCalendar( 'renderEvent', newEvent ); 
+  }
+}
+///////////filtro grupo responsable
+if(filtro=='grupoResponsable'){
+   if(elemento.grupoResponsableId==grupoResponsableId){
+   var newEvent = {
+                title: titulo,
+                start: start,
+                end: end,
+                color : color
+            };
+   $('#calendar').fullCalendar( 'renderEvent', newEvent ); 
+  }
+}
+
+
 
 
 }
@@ -291,21 +320,42 @@ $( "#tipoFiltroTarea" ).change(function() {
         $( "#divFiltroEstado" ).removeClass('hidden');
         $( "#divFiltroAutor" ).addClass('hidden');
         $( "#divFiltroFecha" ).addClass('hidden');
+        $( "#divFiltroPersonaResponsable" ).addClass('hidden');
+        $( "#divFiltroGrupoResponsable" ).addClass('hidden');
        } 
 
   if($("#tipoFiltroTarea").val()=="filtroAutor"){
         $( "#divFiltroEstado" ).addClass('hidden');
         $( "#divFiltroAutor" ).removeClass('hidden');
         $( "#divFiltroFecha" ).addClass('hidden');
+        $( "#divFiltroPersonaResponsable" ).addClass('hidden');
+        $( "#divFiltroGrupoResponsable" ).addClass('hidden');
        } 
 
   if($("#tipoFiltroTarea").val()=="filtroFecha"){
         $( "#divFiltroEstado" ).addClass('hidden');
         $( "#divFiltroAutor" ).addClass('hidden');
         $( "#divFiltroFecha" ).removeClass('hidden');
+        $( "#divFiltroPersonaResponsable" ).addClass('hidden');
+        $( "#divFiltroGrupoResponsable" ).addClass('hidden');
        } 
+   if($("#tipoFiltroTarea").val()=="filtroPersonaResponsable"){
+        $( "#divFiltroEstado" ).addClass('hidden');
+        $( "#divFiltroAutor" ).addClass('hidden');
+        $( "#divFiltroFecha" ).addClass('hidden');
+        $( "#divFiltroPersonaResponsable" ).removeClass('hidden');
+        $( "#divFiltroGrupoResponsable" ).addClass('hidden');
+      } 
+   if($("#tipoFiltroTarea").val()=="filtroGrupoResponsable"){
+        $( "#divFiltroEstado" ).addClass('hidden');
+        $( "#divFiltroAutor" ).addClass('hidden');
+        $( "#divFiltroFecha" ).addClass('hidden');
+        $( "#divFiltroPersonaResponsable" ).addClass('hidden');
+        $( "#divFiltroGrupoResponsable" ).removeClass('hidden');
+      } 
+
       
-     
+    
 
 
 });
@@ -318,9 +368,16 @@ $( "#autorTareaFiltrar" ).change(function() {
  cargarCalendarioFiltrado('autor');
 });
 
-
 $( "#filtrarFechaBtn" ).click(function() {
   cargarCalendarioFiltrado('fecha');
+});
+
+$( "#personaResponsableTareaFiltrar" ).change(function() {
+ cargarCalendarioFiltrado('personaResponsable');
+});
+
+$( "#grupoResponsableTareaFiltrar" ).change(function() {
+ cargarCalendarioFiltrado('grupoResponsable');
 });
 
 
